@@ -16,6 +16,14 @@ class Main(QtWidgets.QMainWindow):
         '''
         #var.ui.btnAceptar.clicked.connect(events.Eventos.Saludo)
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
+        var.ui.btnAceptar.clicked.connect(events.Eventos.validarDNI)
+        var.rbtSex = (var.ui.rbtFem, var.ui.rbtMasc)
+        for i in var.rbtSex:
+            i.toggled.connect(events.Eventos.selSexo)
+
+        var.chkpago = (var.ui.chkEfect, var.ui.chkTarj, var.ui.chkTrans)
+        for i in var.chkpago:
+            i.stateChanged.connect(events.Eventos.selPago)
 
         '''
         Controles del menubar
