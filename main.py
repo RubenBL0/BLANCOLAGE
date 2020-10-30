@@ -1,6 +1,6 @@
 from ventana import *
 import sys
-import var, events
+import var, events, clients
 
 class Main(QtWidgets.QMainWindow):
 
@@ -25,6 +25,9 @@ class Main(QtWidgets.QMainWindow):
         for i in var.chkpago:
             i.stateChanged.connect(events.Eventos.selPago)
 
+        clients.Clientes.cargarProv()
+        var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
+        #var.ui.entDNI.editingFinished.connect(events.Eventos.validarDNI)
         '''
         Controles del menubar
         '''

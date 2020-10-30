@@ -1,3 +1,5 @@
+import var
+
 class Clientes():
     #Clase gestión Clientes
     def validarDNI(dni):
@@ -17,3 +19,20 @@ class Clientes():
         except Exception as error:
             print("Error en el módulo de validación del DNI. ", str(error))
             return None
+
+
+    def cargarProv():
+        try:
+            prov = ["","A Coruña","Lugo","Ourense","Pontevedra"]
+            for i in prov:
+                var.ui.cmbProv.addItem(i)
+        except Exception as error:
+            print("Error: %s " % str(error))
+
+
+    def selProv(prov):
+        try:
+            print("Has seleccionado la provincia de ", prov)
+            return prov
+        except Exception as error:
+            print("Error: %s" % str(error))
