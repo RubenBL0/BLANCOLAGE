@@ -5,9 +5,13 @@ class Eventos():
 
     #Eventos Generales
 
-    def Salir(self):
+    def Salir():
         try:
-            sys.exit()
+            var.dialog.show()
+            if var.dialog.exec_():
+                sys.exit()
+            else:
+                var.dialog.close()
         except Exception as error:
             print("Error %s " % str(error))
 

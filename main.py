@@ -1,6 +1,6 @@
 from ventana import *
-import sys
-import var, events, clients
+from warning import *
+import sys, var, events, clients
 
 class Main(QtWidgets.QMainWindow):
 
@@ -31,7 +31,17 @@ class Main(QtWidgets.QMainWindow):
         '''
         Controles del menubar
         '''
+        QtWidgets.QAction(self).triggered.connect(self.close)
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
+
+class DialogSalir(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogSalir, self).__init__()
+        var.dialog = Ui_Dialog()
+        var.dialog.setupUi(self)
+        var.dialog.buttonBox.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
+        var.dialog.buttonBox.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.Salir)
+
 
 
 if __name__ == "__main__":
