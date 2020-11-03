@@ -1,2 +1,3 @@
 global ui, rbtSex
-global dialog
+global avisoSalir
+global dlgCalendar
