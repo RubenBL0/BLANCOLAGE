@@ -1,35 +1,20 @@
-import var, sys, clients
+import var, sys
 
 
 class Eventos():
 
     #Eventos Generales
 
-    def Salir(self):
+    def Salir(event):
         try:
-            var.avisosalir.show()
-            if var.avisoSalir.exec_():
+            var.dlgsalir.show()
+            if var.dlgsalir.exec_():
                 sys.exit()
             else:
-                var.avisosalir.close()
+                var.dlgsalir.hide()
+                event.ignore()
         except Exception as error:
             print("Error %s " % str(error))
-
-
-    def validarDNI(self):
-        try:
-            dni = var.ui.entDNI.text()
-            if clients.Clientes.validarDNI(dni):
-                var.ui.lblValido.setStyleSheet("QLabel {color: green;}")
-                var.ui.lblValido.setText("V")
-                var.ui.entDNI.setText(dni.upper())
-            else:
-                var.ui.lblValido.setStyleSheet("QLabel {color: red;}")
-                var.ui.lblValido.setText("X")
-                var.ui.entDNI.setText(dni.upper())
-
-        except Exception as error:
-            print("Error: %s " % str(error))
 
 
     def selSexo(self):

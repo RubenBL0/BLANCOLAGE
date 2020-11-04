@@ -11,17 +11,17 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_calendar(object):
-    def setupUi(self, calendar):
-        calendar.setObjectName("calendar")
-        calendar.resize(328, 201)
-        self.Calendar = QtWidgets.QCalendarWidget(calendar)
+class Ui_dlgCalendar(object):
+    def setupUi(self, dlgCalendar):
+        dlgCalendar.setObjectName("dlgCalendar")
+        dlgCalendar.resize(328, 201)
+        self.Calendar = QtWidgets.QCalendarWidget(dlgCalendar)
         self.Calendar.setGeometry(QtCore.QRect(0, 0, 331, 201))
         self.Calendar.setObjectName("Calendar")
 
-        self.retranslateUi(calendar)
-        QtCore.QMetaObject.connectSlotsByName(calendar)
+        self.retranslateUi(dlgCalendar)
+        QtCore.QMetaObject.connectSlotsByName(dlgCalendar)
 
-    def retranslateUi(self, calendar):
+    def retranslateUi(self, dlgCalendar):
         _translate = QtCore.QCoreApplication.translate
-        calendar.setWindowTitle(_translate("calendar", "Fecha Alta"))
+        dlgCalendar.setWindowTitle(_translate("dlgCalendar", "Fecha Alta"))

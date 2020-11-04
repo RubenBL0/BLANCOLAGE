@@ -20,6 +20,21 @@ class Clientes():
             print("Error en el módulo de validación del DNI. ", str(error))
             return None
 
+    def validoDni():
+        try:
+            dni = var.ui.entDNI.text()
+            if Clientes.validarDNI(dni):
+                var.ui.lblValido.setStyleSheet("QLabel {color: green;}")
+                var.ui.lblValido.setText("V")
+                var.ui.entDNI.setText(dni.upper())
+            else:
+                var.ui.lblValido.setStyleSheet("QLabel {color: red;}")
+                var.ui.lblValido.setText("X")
+                var.ui.entDNI.setText(dni.upper())
+
+        except Exception as error:
+            print("Error: %s " % str(error))
+            return None
 
     def cargarProv():
         try:
@@ -37,5 +52,16 @@ class Clientes():
         except Exception as error:
             print("Error: %s" % str(error))
 
-    def cargarFecha(self):
-        print("Hola")
+    def abrirCalendar(self):
+        try:
+            var.dlgcalendar.show()
+        except Exception as error:
+            print("Error: %s" % str(error))
+
+    def cargarFecha(qDate):
+        try:
+            data = ("{0}/{1}/{2}".format(qDate.day(), qDate.month(), qDate.year()))
+            var.ui.editCliAlta.setText(str(data))
+            var.dlgcalendar.hide()
+        except Exception as error:
+            print("Error: %s" % str(error))
