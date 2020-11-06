@@ -45,16 +45,17 @@ class Main(QtWidgets.QMainWindow):
         var.ui.entDNI.editingFinished.connect(clients.Clientes.validoDni)
         var.rbtSex = (var.ui.rbtFem, var.ui.rbtMasc)
         for i in var.rbtSex:
-            i.toggled.connect(events.Eventos.selSexo)
+            i.toggled.connect(clients.Clientes.selSexo)
 
         var.chkpago = (var.ui.chkEfect, var.ui.chkTarj, var.ui.chkTrans)
         for i in var.chkpago:
-            i.stateChanged.connect(events.Eventos.selPago)
+            i.stateChanged.connect(clients.Clientes.selPago)
 
         clients.Clientes.cargarProv()
         var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
         #var.ui.entDNI.editingFinished.connect(events.Eventos.validarDNI)
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
+        var.ui.btnAceptar.clicked.connect(clients.Clientes.showClientes)
         '''
         Controles del menubar
         '''
@@ -67,5 +68,5 @@ def closeEvent(self, event):
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     window = Main()
-    window.show()
+    window.showMaximized()
     sys.exit(app.exec())
