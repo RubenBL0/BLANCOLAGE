@@ -2,8 +2,7 @@ from ventana import *
 from warning import *
 from vencalendar import *
 from datetime import datetime
-
-import sys, var, events, clients
+import sys, var, events, clients, conexion
 
 
 class DialogSalir(QtWidgets.QDialog):
@@ -12,7 +11,9 @@ class DialogSalir(QtWidgets.QDialog):
         var.dlgsalir = Ui_Dialog()
         var.dlgsalir.setupUi(self)
         var.dlgsalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
-        var.dlgsalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.Salir)
+        # var.dlgsalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.closeSalir)
+        # no es neceasario no quiero que haga nada
+
 
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
@@ -27,7 +28,6 @@ class DialogCalendar(QtWidgets.QDialog):
 
 
 class Main(QtWidgets.QMainWindow):
-
     def __init__(self):
         super(Main, self).__init__()
         var.ui = Ui_VenPrincipal()
@@ -35,37 +35,49 @@ class Main(QtWidgets.QMainWindow):
         var.dlgsalir = DialogSalir()
         var.dlgcalendar = DialogCalendar()
 
-        #Código de conexión de los eventos
+        '''
+        colección de datos
+        '''
+        var.rbtsex = (var.ui.rbtFem, var.ui.rbtMasc)
+        var.chkpago = (var.ui.chkEfec, var.ui.chkTar, var.ui.chkTrans)
 
         '''
-        Botones
+        conexion de eventos con los objetos
+        estamos conectando el código con la interfaz gráfico
+        botones formulario cliente
         '''
-        #var.ui.btnAceptar.clicked.connect(events.Eventos.Saludo)
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
-        var.ui.entDNI.editingFinished.connect(clients.Clientes.validoDni)
-        var.rbtSex = (var.ui.rbtFem, var.ui.rbtMasc)
-        for i in var.rbtSex:
+        var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
+        var.ui.editDni.editingFinished.connect(lambda: clients.Clientes.validoDni())
+        var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
+        var.ui.btnAltaCli.clicked.connect(clients.Clientes.altaCliente)
+        var.ui.btnLimpiarCli.clicked.connect(clients.Clientes.limpiarCli)
+        var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCliente)
+        var.ui.btnModifCli.clicked.connect(clients.Clientes.modifCliente)
+        var.ui.btnReloadCli.clicked.connect(clients.Clientes.reloadCli)
+        for i in var.rbtsex:
             i.toggled.connect(clients.Clientes.selSexo)
-
-        var.chkpago = (var.ui.chkEfect, var.ui.chkTarj, var.ui.chkTrans)
         for i in var.chkpago:
             i.stateChanged.connect(clients.Clientes.selPago)
 
-        clients.Clientes.cargarProv()
         var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
-        #var.ui.entDNI.editingFinished.connect(events.Eventos.validarDNI)
-        var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
-        var.ui.btnAceptar.clicked.connect(clients.Clientes.showClientes)
+        var.ui.tableCli.clicked.connect(clients.Clientes.cargarCli)
+        var.ui.tableCli.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        events.Eventos.cargarProv()
         '''
-        Controles del menubar
+        módulos conexion base datos
         '''
-        QtWidgets.QAction(self).triggered.connect(self.close)
-        var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
 
-def closeEvent(self, event):
-    event.Eventos.Salir(event)
+        conexion.Conexion.db_connect(var.filebd)
+        # conexion.Conexion()
+        conexion.Conexion.mostrarClientes(self)
 
-if __name__ == "__main__":
+    def closeEvent(self, event):
+        if event:
+            events.Eventos.Salir(event)
+
+
+if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
     window.showMaximized()
