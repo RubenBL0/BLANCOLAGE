@@ -97,7 +97,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="entDireccion">
+          <widget class="QLineEdit" name="editDir">
            <property name="enabled">
             <bool>true</bool>
            </property>
@@ -333,10 +333,27 @@
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="7">
+          <widget class="QLabel" name="lblPago">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Métodos de Pago:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="9">
           <widget class="QCheckBox" name="chkTar">
            <property name="text">
             <string>Tarjeta</string>
            </property>
+           <attribute name="buttonGroup">
+            <string notr="true">grpbtnPay</string>
+           </attribute>
           </widget>
          </item>
          <item row="0" column="0">
@@ -359,20 +376,6 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="5">
-          <widget class="QLabel" name="lblPago">
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Métodos de Pago:</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
           <widget class="QRadioButton" name="rbtFem">
            <property name="font">
@@ -383,16 +386,22 @@
            <property name="text">
             <string>Femenino</string>
            </property>
+           <attribute name="buttonGroup">
+            <string notr="true">grpbtnSex</string>
+           </attribute>
           </widget>
          </item>
-         <item row="0" column="8">
+         <item row="0" column="10">
           <widget class="QCheckBox" name="chkTrans">
            <property name="text">
             <string>Transferencia</string>
            </property>
+           <attribute name="buttonGroup">
+            <string notr="true">grpbtnPay</string>
+           </attribute>
           </widget>
          </item>
-         <item row="0" column="6">
+         <item row="0" column="8">
           <widget class="QCheckBox" name="chkEfec">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -408,9 +417,12 @@
            <property name="text">
             <string>Efectivo</string>
            </property>
+           <attribute name="buttonGroup">
+            <string notr="true">grpbtnPay</string>
+           </attribute>
           </widget>
          </item>
-         <item row="0" column="4">
+         <item row="0" column="6">
           <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -431,7 +443,39 @@
            <property name="text">
             <string>Masculino</string>
            </property>
+           <attribute name="buttonGroup">
+            <string notr="true">grpbtnSex</string>
+           </attribute>
           </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QLabel" name="lblEdad">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Edad:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QSpinBox" name="spinEdad"/>
+         </item>
+         <item row="0" column="3">
+          <spacer name="horizontalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </widget>
@@ -570,23 +614,51 @@
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="1" column="6">
-          <widget class="QLabel" name="lblCliAlta">
+         <item row="1" column="1">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>37</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="5">
+          <widget class="QPushButton" name="btnReloadCli">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>24</horstretch>
+             <verstretch>24</verstretch>
             </sizepolicy>
            </property>
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
+           <property name="minimumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
            </property>
-           <property name="text">
-            <string>Fecha de Alta:     </string>
+           <property name="maximumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../../Downloads/reload.png</normaloff>../../Downloads/reload.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>32</width>
+             <height>32</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -608,6 +680,26 @@
            </property>
            <property name="maxLength">
             <number>9</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="7">
+          <widget class="QLabel" name="lblCliAlta">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Fecha de Alta:     </string>
            </property>
           </widget>
          </item>
@@ -655,7 +747,7 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="7">
+         <item row="1" column="8">
           <widget class="QLineEdit" name="editClialta">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -676,7 +768,7 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="5">
+         <item row="1" column="6">
           <spacer name="horizontalSpacer_3">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -692,7 +784,7 @@
            </property>
           </spacer>
          </item>
-         <item row="1" column="8">
+         <item row="1" column="9">
           <widget class="QPushButton" name="btnCalendar">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
@@ -722,26 +814,10 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>37</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
          <item row="1" column="4">
-          <widget class="QPushButton" name="btnReloadCli">
+          <widget class="QPushButton" name="btnBuscarCli">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
              <horstretch>24</horstretch>
              <verstretch>24</verstretch>
             </sizepolicy>
@@ -758,19 +834,35 @@
              <height>24</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
            <property name="icon">
             <iconset>
-             <normaloff>../../Downloads/reload.png</normaloff>../../Downloads/reload.png</iconset>
+             <normaloff>../../Downloads/lupa.png</normaloff>../../Downloads/lupa.png</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>32</width>
-             <height>32</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
           </widget>
          </item>
         </layout>
+       </widget>
+       <widget class="QLabel" name="lblCodcli">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>10</y>
+          <width>47</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tab_2">
@@ -806,19 +898,6 @@
       </property>
      </spacer>
     </item>
-    <item row="4" column="2">
-     <spacer name="horizontalSpacer_7">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
     <item row="1" column="1">
      <spacer name="verticalSpacer">
       <property name="orientation">
@@ -831,6 +910,19 @@
        <size>
         <width>0</width>
         <height>50</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="4" column="2">
+     <spacer name="horizontalSpacer_7">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
        </size>
       </property>
      </spacer>
@@ -869,4 +961,12 @@
   <include location="img/logo.qrc"/>
  </resources>
  <connections/>
+ <buttongroups>
+  <buttongroup name="grpbtnPay">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="grpbtnSex"/>
+ </buttongroups>
 </ui>

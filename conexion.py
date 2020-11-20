@@ -16,8 +16,8 @@ class Conexion():
 
     def altaCli(cliente):
         query = QtSql.QSqlQuery()
-        query.prepare('insert into clientes (dni, apellidos, nombre, fechalta, direccion, provincia, sexo, formaspago)'
-                    'VALUES (:dni, :apellidos, :nombre, :fechalta, :direccion, :provincia, :sexo, :formaspago)')
+        query.prepare('insert into clientes (dni, apellidos, nombre, fechalta, direccion, provincia, sexo, formapago, edad)'
+                    'VALUES (:dni, :apellidos, :nombre, :fechalta, :direccion, :provincia, :sexo, :formapago, :edad)')
         query.bindValue(':dni', str(cliente[0]))
         query.bindValue(':apellidos', str(cliente[1]))
         query.bindValue(':nombre', str(cliente[2]))
@@ -25,12 +25,13 @@ class Conexion():
         query.bindValue(':direccion', str(cliente[4]))
         query.bindValue(':provincia', str(cliente[5]))
         query.bindValue(':sexo', str(cliente[6]))
-        query.bindValue(':formaspago', str(cliente[7]))
+        query.bindValue(':formapago', str(cliente[7]))
+        query.bindValue(':edad', int(cliente[8]))
         if query.exec_():
             print("Inserción Correcta")
             Conexion.mostrarClientes()
         else:
-            print("Error: ", query.lastError().text())
+            print("Error: aqui", query.lastError().text())
 
     def cargarCliente():
         dni = var.ui.editDni.text()
@@ -43,6 +44,7 @@ class Conexion():
                 var.ui.editClialta.setText(query.value(4))
                 var.ui.editDir.setText(query.value(5))
                 var.ui.cmbProv.setCurrentText(str(query.value(6)))
+                var.ui.spinEdad.setValue(int(query.value(9)))
                 if str(query.value(7)) == 'Mujer':
                     var.ui.rbtFem.setChecked(True)
                     var.ui.rbtMasc.setChecked(False)
@@ -99,7 +101,7 @@ class Conexion():
         query = QtSql.QSqlQuery()
         codigo = int(codigo)
         query.prepare('update clientes set dni=:dni, apellidos=:apellidos, nombre=:nombre, fechalta=:fechalta, '
-                      'direccion=:direccion, provincia=:provincia, sexo=:sexo, formaspago=:formaspago where codigo=:codigo')
+                      'direccion=:direccion, provincia=:provincia, sexo=:sexo, formaspago=:formaspago, edad=:edad where codigo=:codigo')
         query.bindValue(':codigo', int(codigo))
         query.bindValue(':dni', str(newdata[0]))
         query.bindValue(':apellidos', str(newdata[1]))
@@ -109,6 +111,7 @@ class Conexion():
         query.bindValue(':provincia', str(newdata[5]))
         query.bindValue(':sexo', str(newdata[6]))
         query.bindValue(':formaspago', str(newdata[7]))
+        query.bindValue(':edad', int(newdata[8]))
         if query.exec_():
             print('Cliente modificado')
             var.ui.lblstatus.setText('Cliente con dni ' + str(newdata[0]) + ' modificado')

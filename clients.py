@@ -68,7 +68,6 @@ class Clientes():
                 if data.isChecked() and i == 2:
                    var.pay.append('Transferencia')
             #var.pay = set(var.pay)
-            print('hola')
             print(var.pay)
             return var.pay
         except Exception as error:
@@ -125,6 +124,7 @@ class Clientes():
             newcli.append(var.sex)
             var.pay2 = Clientes.selPago()
             newcli.append(var.pay2)
+            newcli.append(var.ui.spinEdad.value())
             if client:
             #comprobarmos que no esté vacío lo principal
             #aquí empieza como trabajar con la TableWidget
@@ -136,6 +136,7 @@ class Clientes():
                     var.ui.tableCli.setItem(row, column, cell)
                     column +=1
                 conexion.Conexion.altaCli(newcli)
+                print("añadido")
             else:
                 print('Faltan Datos')
             #Clientes.limpiarCli()
@@ -159,6 +160,7 @@ class Clientes():
             var.ui.cmbProv.setCurrentIndex(0)
             var.ui.lblValidar.setText('')
             var.ui.lblCodcli.setText('')
+            var.ui.spinEdad.setValue(18)
         except Exception as error:
             print('Error limpiar widgets: %s ' % str(error))
 
@@ -178,7 +180,7 @@ class Clientes():
                 dato.setText(fila[i])
             conexion.Conexion.cargarCliente()
         except Exception as error:
-            print('Error cargar clientes: %s ' % str(error))
+            print(':Error cargar clientes 1 %s ' % str(error))
 
     def bajaCliente(self):
         '''
@@ -192,7 +194,7 @@ class Clientes():
             Clientes.limpiarCli()
 
         except Exception as error:
-            print("Error cargar clientes: %s " % str(error))
+            print("Error cargar clientes 2: %s " % str(error))
 
     def modifCliente(self):
         '''
@@ -213,7 +215,7 @@ class Clientes():
             conexion.Conexion.mostrarClientes(self)
 
         except Exception as error:
-            print("Error cargar clientes: %s" % str(error))
+            print("Error cargar clientes 3: %s" % str(error))
 
 
     def reloadCli(self):
