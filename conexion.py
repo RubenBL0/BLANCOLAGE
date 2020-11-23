@@ -101,7 +101,7 @@ class Conexion():
         query = QtSql.QSqlQuery()
         codigo = int(codigo)
         query.prepare('update clientes set dni=:dni, apellidos=:apellidos, nombre=:nombre, fechalta=:fechalta, '
-                      'direccion=:direccion, provincia=:provincia, sexo=:sexo, formaspago=:formaspago, edad=:edad where codigo=:codigo')
+                      'direccion=:direccion, provincia=:provincia, sexo=:sexo, formapago=:formapago, edad=:edad where codigo=:codigo')
         query.bindValue(':codigo', int(codigo))
         query.bindValue(':dni', str(newdata[0]))
         query.bindValue(':apellidos', str(newdata[1]))
@@ -110,8 +110,8 @@ class Conexion():
         query.bindValue(':direccion', str(newdata[4]))
         query.bindValue(':provincia', str(newdata[5]))
         query.bindValue(':sexo', str(newdata[6]))
-        query.bindValue(':formaspago', str(newdata[7]))
-        query.bindValue(':edad', int(newdata[8]))
+        query.bindValue(':formapago', str(newdata[7]))
+        query.bindValue(':edad', str(newdata[8]))
         if query.exec_():
             print('Cliente modificado')
             var.ui.lblstatus.setText('Cliente con dni ' + str(newdata[0]) + ' modificado')

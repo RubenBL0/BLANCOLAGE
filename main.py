@@ -57,7 +57,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnReloadCli.clicked.connect(clients.Clientes.reloadCli)
         var.ui.btnBuscarCli.clicked.connect(clients.Clientes.buscarCli)
         var.ui.spinEdad.setValue(18)
-        var.ui.spinEdad.setMaximum(30)
+        var.ui.spinEdad.setMaximum(65)
         var.ui.spinEdad.setMinimum(16)
         for i in var.rbtsex:
             i.toggled.connect(clients.Clientes.selSexo)

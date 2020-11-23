@@ -462,7 +462,14 @@
           </widget>
          </item>
          <item row="0" column="5">
-          <widget class="QSpinBox" name="spinEdad"/>
+          <widget class="QSpinBox" name="spinEdad">
+           <property name="minimum">
+            <number>16</number>
+           </property>
+           <property name="maximum">
+            <number>65</number>
+           </property>
+          </widget>
          </item>
          <item row="0" column="3">
           <spacer name="horizontalSpacer_8">
@@ -630,40 +637,8 @@
            </property>
           </spacer>
          </item>
-         <item row="1" column="5">
-          <widget class="QPushButton" name="btnReloadCli">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>24</horstretch>
-             <verstretch>24</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>../../Downloads/reload.png</normaloff>../../Downloads/reload.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QLineEdit" name="editDni">
+         <item row="1" column="8">
+          <widget class="QLineEdit" name="editClialta">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -679,7 +654,7 @@
             <string notr="true">background-color:rgb(209, 255, 208)</string>
            </property>
            <property name="maxLength">
-            <number>9</number>
+            <number>15</number>
            </property>
           </widget>
          </item>
@@ -700,6 +675,26 @@
            </property>
            <property name="text">
             <string>Fecha de Alta:     </string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="lblDNI">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>DNI:</string>
            </property>
           </widget>
          </item>
@@ -727,28 +722,8 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="lblDNI">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>DNI:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="8">
-          <widget class="QLineEdit" name="editClialta">
+         <item row="1" column="2">
+          <widget class="QLineEdit" name="editDni">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -764,7 +739,7 @@
             <string notr="true">background-color:rgb(209, 255, 208)</string>
            </property>
            <property name="maxLength">
-            <number>15</number>
+            <number>9</number>
            </property>
           </widget>
          </item>
@@ -839,12 +814,44 @@
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../../Downloads/lupa.png</normaloff>../../Downloads/lupa.png</iconset>
+             <normaloff>img/lupa.png</normaloff>img/lupa.png</iconset>
            </property>
            <property name="iconSize">
             <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QPushButton" name="btnReloadCli">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>24</horstretch>
+             <verstretch>24</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
              <width>24</width>
              <height>24</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>img/reload.png</normaloff>img/reload.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
             </size>
            </property>
           </widget>
@@ -962,11 +969,11 @@
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="grpbtnSex"/>
   <buttongroup name="grpbtnPay">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="grpbtnSex"/>
  </buttongroups>
 </ui>
