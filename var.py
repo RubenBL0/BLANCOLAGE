@@ -10,3 +10,4 @@ pay = []
 pay2 = []
 filebd = 'empresa.db'
 global DATABASE
+global filedlgabrir

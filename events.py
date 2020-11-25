@@ -40,3 +40,17 @@ class Eventos():
 
         except Exception as error:
             print('Error: %s' % str(error))
+
+    def Backup(self):
+        try:
+            print("Aquí hace el backup")
+
+        except Exception as error:
+            print("Error: %s" % str(error))
+
+    def AbrirDir(self):
+        try:
+            var.filedlgabrir.show()
+
+        except Exception as error:
+            print("Error: %s" % str(error))

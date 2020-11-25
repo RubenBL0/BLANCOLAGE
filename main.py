@@ -1,8 +1,11 @@
 from ventana import *
 from warning import *
 from vencalendar import *
-from datetime import datetime
+from datetime import datetime, date
 import sys, var, events, clients, conexion
+import locale
+
+locale.setlocale(locale.LC_ALL, 'es-ES')
 
 
 class DialogSalir(QtWidgets.QDialog):
@@ -11,9 +14,6 @@ class DialogSalir(QtWidgets.QDialog):
         var.dlgsalir = Ui_Dialog()
         var.dlgsalir.setupUi(self)
         var.dlgsalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
-        # var.dlgsalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.No).clicked.connect(events.Eventos.closeSalir)
-        # no es neceasario no quiero que haga nada
-
 
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
@@ -26,6 +26,9 @@ class DialogCalendar(QtWidgets.QDialog):
         var.dlgcalendar.Calendar.setSelectedDate((QtCore.QDate(anoactual, mesactual, diaactual)))
         var.dlgcalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
 
+class FileDialogAbrir(QtWidgets.QFileDialog):
+    def __init__(self):
+        super(FileDialogAbrir, self).__init__()
 
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
@@ -34,6 +37,11 @@ class Main(QtWidgets.QMainWindow):
         var.ui.setupUi(self)
         var.dlgsalir = DialogSalir()
         var.dlgcalendar = DialogCalendar()
+        var.filedlgabrir = FileDialogAbrir()
+        '''
+        poner la fecha actual
+        '''
+        var.ui.lblFecha.setText(str(date.today().strftime("%A, %d de %B de %Y")))
 
         '''
         colección de datos
@@ -55,7 +63,13 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCliente)
         var.ui.btnModifCli.clicked.connect(clients.Clientes.modifCliente)
         var.ui.btnReloadCli.clicked.connect(clients.Clientes.reloadCli)
-        var.ui.btnBuscarCli.clicked.connect(clients.Clientes.buscarCli)
+        var.ui.btnBuscarCli.clicked.connect(conexion.Conexion.cargarCliente)
+        var.ui.statusbar.addPermanentWidget(var.ui.lblStatus, 1)
+        var.ui.lblStatus.setText("Bienvenido a 2º DAM")
+        var.ui.toolbarBackup.triggered.connect(events.Eventos.Backup)
+        var.ui.toolbarSalir.triggered.connect(events.Eventos.Salir)
+        var.ui.toolbarAbrir.triggered.connect(events.Eventos.AbrirDir)
+        var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.spinEdad.setValue(18)
         var.ui.spinEdad.setMaximum(65)
         var.ui.spinEdad.setMinimum(16)

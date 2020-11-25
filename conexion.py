@@ -29,6 +29,7 @@ class Conexion():
         query.bindValue(':edad', int(cliente[8]))
         if query.exec_():
             print("Inserción Correcta")
+            var.ui.lblStatus.setText("Alta cliente con DNI " + str(cliente[0]))
             Conexion.mostrarClientes()
         else:
             print("Error: aqui", query.lastError().text())
@@ -41,6 +42,8 @@ class Conexion():
         if query.exec_():
             while query.next():
                 var.ui.lblCodcli.setText(str(query.value(0)))
+                var.ui.editApel.setText(str(query.value(2)))
+                var.ui.editNome.setText(str(query.value(3)))
                 var.ui.editClialta.setText(query.value(4))
                 var.ui.editDir.setText(query.value(5))
                 var.ui.cmbProv.setCurrentText(str(query.value(6)))
@@ -114,7 +117,7 @@ class Conexion():
         query.bindValue(':edad', str(newdata[8]))
         if query.exec_():
             print('Cliente modificado')
-            var.ui.lblstatus.setText('Cliente con dni ' + str(newdata[0]) + ' modificado')
+            var.ui.lblStatus.setText('Cliente con dni ' + str(newdata[0]) + ' modificado')
         else:
             print("Error modificar cliente: ", query.lastError().text())
 

@@ -20,8 +20,8 @@ class Clientes():
                 dig_control = dni[8]
                 dni = dni[:8]
                 if dni[0] in dig_ext:
-                    dni  = dni.replace(dni[0],reemp_dig_ext[dni[0]])
-                return len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni)%23 ] == dig_control
+                    dni = dni.replace(dni[0], reemp_dig_ext[dni[0]])
+                return len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == dig_control
 
         except:
             print('Error módulo validar DNI')
@@ -161,6 +161,7 @@ class Clientes():
             var.ui.lblValidar.setText('')
             var.ui.lblCodcli.setText('')
             var.ui.spinEdad.setValue(18)
+            var.ui.lblStatus.setText("Bienvenido a 2º DAM")
         except Exception as error:
             print('Error limpiar widgets: %s ' % str(error))
 
@@ -172,7 +173,7 @@ class Clientes():
         '''
         try:
             fila = var.ui.tableCli.selectedItems()
-            client = [ var.ui.editDni, var.ui.editApel, var.ui.editNome ]
+            client = [var.ui.editDni, var.ui.editApel, var.ui.editNome]
             if fila:
                 fila = [dato.text() for dato in fila]
             i = 0
@@ -192,6 +193,7 @@ class Clientes():
             conexion.Conexion.bajaCli(dni)
             conexion.Conexion.mostrarClientes(self)
             Clientes.limpiarCli()
+            var.ui.lblStatus.setText("Cliente con DNI " + dni + " dado de baja")
 
         except Exception as error:
             print("Error cargar clientes 2: %s " % str(error))
