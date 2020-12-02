@@ -1,4 +1,4 @@
-import sys, var, warning
+import sys, var, warning, clients
 
 class Eventos():
 
@@ -54,3 +54,25 @@ class Eventos():
 
         except Exception as error:
             print("Error: %s" % str(error))
+
+    def Imprimir(self):
+        try:
+            var.dlgimprimir.show()
+
+        except Exception as error:
+            print("Error: %s" % str(error))
+
+    def Borrar(self):
+        try:
+            var.dlgborrar.show()
+            if var.dlgborrar.exec_():
+                clients.Clientes.bajaCliente
+            else:
+                var.dlgborrar.hide()
+
+        except Exception as error:
+            print("Error: %s" % str(error))
+
+
+
+

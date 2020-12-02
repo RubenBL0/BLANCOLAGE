@@ -536,12 +536,18 @@ class Ui_VenPrincipal(object):
         self.actionAbrir = QtWidgets.QAction(VenPrincipal)
         self.actionAbrir.setShortcutVisibleInContextMenu(False)
         self.actionAbrir.setObjectName("actionAbrir")
+        self.toolbarImprimir = QtWidgets.QAction(VenPrincipal)
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap(":/newPrefix/impresora.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.toolbarImprimir.setIcon(icon6)
+        self.toolbarImprimir.setObjectName("toolbarImprimir")
         self.menuArchivo.addAction(self.actionAbrir)
         self.menuArchivo.addSeparator()
         self.menuArchivo.addAction(self.actionSalir)
         self.menubar.addAction(self.menuArchivo.menuAction())
         self.toolBar.addAction(self.toolbarAbrir)
         self.toolBar.addAction(self.toolbarBackup)
+        self.toolBar.addAction(self.toolbarImprimir)
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.toolbarSalir)
 
@@ -593,8 +599,11 @@ class Ui_VenPrincipal(object):
         self.toolbarAbrir.setToolTip(_translate("VenPrincipal", "Abrir"))
         self.actionAbrir.setText(_translate("VenPrincipal", "Abrir..."))
         self.actionAbrir.setShortcut(_translate("VenPrincipal", "Ctrl+O"))
+        self.toolbarImprimir.setText(_translate("VenPrincipal", "toolbarImpresora"))
+        self.toolbarImprimir.setToolTip(_translate("VenPrincipal", "Imprimir"))
 import backup_rc
 import calendar_rc
 import carpeta_rc
+import impresora_rc
 import logo_rc
 import salir_rc

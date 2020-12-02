@@ -1,11 +1,19 @@
 from ventana import *
 from warning import *
 from vencalendar import *
+from ventanaborrar import *
 from datetime import datetime, date
 import sys, var, events, clients, conexion
 import locale
+from PyQt5.QtPrintSupport import QPrintDialog
+
 
 locale.setlocale(locale.LC_ALL, 'es-ES')
+
+class PrintDialogAbrir(QPrintDialog):
+    def __init__(self):
+        super(PrintDialogAbrir, self).__init__()
+        self.setModal(True)
 
 
 class DialogSalir(QtWidgets.QDialog):
@@ -14,6 +22,7 @@ class DialogSalir(QtWidgets.QDialog):
         var.dlgsalir = Ui_Dialog()
         var.dlgsalir.setupUi(self)
         var.dlgsalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
+        self.setModal(True)
 
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
@@ -25,10 +34,20 @@ class DialogCalendar(QtWidgets.QDialog):
         anoactual = datetime.now().year
         var.dlgcalendar.Calendar.setSelectedDate((QtCore.QDate(anoactual, mesactual, diaactual)))
         var.dlgcalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
+        self.setModal(True)
+
+class DialogBorrar(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogBorrar, self).__init__()
+        var.dlgborrar = Ui_DialogBorrar()
+        var.dlgborrar.setupUi(self)
+        var.dlgborrar.btnBoxBorrar.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(clients.Clientes.bajaCliente)
+        self.setModal(True)
 
 class FileDialogAbrir(QtWidgets.QFileDialog):
     def __init__(self):
         super(FileDialogAbrir, self).__init__()
+        self.setModal(True)
 
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
@@ -38,6 +57,8 @@ class Main(QtWidgets.QMainWindow):
         var.dlgsalir = DialogSalir()
         var.dlgcalendar = DialogCalendar()
         var.filedlgabrir = FileDialogAbrir()
+        var.dlgimprimir = PrintDialogAbrir()
+        var.dlgborrar = DialogBorrar()
         '''
         poner la fecha actual
         '''
@@ -60,7 +81,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnCalendar.clicked.connect(clients.Clientes.abrirCalendar)
         var.ui.btnAltaCli.clicked.connect(clients.Clientes.altaCliente)
         var.ui.btnLimpiarCli.clicked.connect(clients.Clientes.limpiarCli)
-        var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCliente)
+        var.ui.btnBajaCli.clicked.connect(events.Eventos.Borrar)
         var.ui.btnModifCli.clicked.connect(clients.Clientes.modifCliente)
         var.ui.btnReloadCli.clicked.connect(clients.Clientes.reloadCli)
         var.ui.btnBuscarCli.clicked.connect(conexion.Conexion.cargarCliente)
@@ -70,6 +91,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.toolbarSalir.triggered.connect(events.Eventos.Salir)
         var.ui.toolbarAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
+        var.ui.toolbarImprimir.triggered.connect(events.Eventos.Imprimir)
         var.ui.spinEdad.setValue(18)
         var.ui.spinEdad.setMaximum(65)
         var.ui.spinEdad.setMinimum(16)

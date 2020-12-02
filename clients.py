@@ -30,7 +30,6 @@ class Clientes():
     def validoDni():
         '''
         muestra mensaje de dni válido
-        :return: none
         '''
         try:
             dni = var.ui.editDni.text()
@@ -38,10 +37,12 @@ class Clientes():
                 var.ui.lblValidar.setStyleSheet('QLabel {color: green;}')
                 var.ui.lblValidar.setText('V')
                 var.ui.editDni.setText(dni.upper())
+                return True
             else:
                 var.ui.lblValidar.setStyleSheet('QLabel {color: red;}')
                 var.ui.lblValidar.setText('X')
                 var.ui.editDni.setText(dni.upper())
+                return False
 
         except:
             print('Error módulo escribir valido DNI')
@@ -135,8 +136,11 @@ class Clientes():
                     cell = QtWidgets.QTableWidgetItem(registro)
                     var.ui.tableCli.setItem(row, column, cell)
                     column +=1
-                conexion.Conexion.altaCli(newcli)
-                print("añadido")
+                if(var.ui.lblValidar == "V"):
+                    conexion.Conexion.altaCli(newcli)
+                    print("añadido")
+                else:
+                    print("NO")
             else:
                 print('Faltan Datos')
             #Clientes.limpiarCli()

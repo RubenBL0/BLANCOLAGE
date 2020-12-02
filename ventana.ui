@@ -1012,6 +1012,7 @@
    </attribute>
    <addaction name="toolbarAbrir"/>
    <addaction name="toolbarBackup"/>
+   <addaction name="toolbarImprimir"/>
    <addaction name="separator"/>
    <addaction name="toolbarSalir"/>
   </widget>
@@ -1076,9 +1077,22 @@
     <bool>false</bool>
    </property>
   </action>
+  <action name="toolbarImprimir">
+   <property name="icon">
+    <iconset resource="img/impresora.qrc">
+     <normaloff>:/newPrefix/impresora.png</normaloff>:/newPrefix/impresora.png</iconset>
+   </property>
+   <property name="text">
+    <string>toolbarImpresora</string>
+   </property>
+   <property name="toolTip">
+    <string>Imprimir</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="img/calendar.qrc"/>
+  <include location="img/impresora.qrc"/>
   <include location="img/carpeta.qrc"/>
   <include location="img/salir.qrc"/>
   <include location="img/backup.qrc"/>
@@ -1086,11 +1100,11 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="grpbtnSex"/>
   <buttongroup name="grpbtnPay">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="grpbtnSex"/>
  </buttongroups>
 </ui>
