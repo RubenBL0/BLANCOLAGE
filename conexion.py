@@ -42,10 +42,11 @@ class Conexion():
         if query.exec_():
             while query.next():
                 var.ui.lblCodcli.setText(str(query.value(0)))
+                var.ui.editDni.setText(str(query.value(1)))
                 var.ui.editApel.setText(str(query.value(2)))
                 var.ui.editNome.setText(str(query.value(3)))
-                var.ui.editClialta.setText(query.value(4))
-                var.ui.editDir.setText(query.value(5))
+                var.ui.editClialta.setText(str(query.value(4)))
+                var.ui.editDir.setText(str(query.value(5)))
                 var.ui.cmbProv.setCurrentText(str(query.value(6)))
                 var.ui.spinEdad.setValue(int(query.value(9)))
                 if str(query.value(7)) == 'Mujer':
@@ -130,4 +131,27 @@ class Conexion():
         query = QtSql.QSqlQuery()
         query.prepare('select * from clientes where dni = :dni')
         query.bindValue(':dni', dni)
+        if query.exec_():
+            while query.next():
+                var.ui.lblCodcli.setText(str(query.value(0)))
+                var.ui.editApel.setText(str(query.value(2)))
+                var.ui.editNome.setText(str(query.value(3)))
+                var.ui.editClialta.setText(str(query.value(4)))
+                var.ui.editDir.setText(str(query.value(5)))
+                var.ui.cmbProv.setCurrentText(str(query.value(6)))
+                var.ui.spinEdad.setValue(int(query.value(9)))
+                if str(query.value(7)) == 'Mujer':
+                    var.ui.rbtFem.setChecked(True)
+                    var.ui.rbtMasc.setChecked(False)
+                else:
+                    var.ui.rbtMasc.setChecked(True)
+                    var.ui.rbtFem.setChecked(False)
+                for data in var.chkpago:
+                    data.setChecked(False)
+                if 'Efectivo' in query.value(8):
+                    var.chkpago[0].setChecked(True)
+                if 'Tarjeta' in query.value(8):
+                    var.chkpago[1].setChecked(True)
+                if 'Transferencia' in query.value(8):
+                    var.chkpago[2].setChecked(True)
 

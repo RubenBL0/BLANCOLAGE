@@ -84,7 +84,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnBajaCli.clicked.connect(events.Eventos.Borrar)
         var.ui.btnModifCli.clicked.connect(clients.Clientes.modifCliente)
         var.ui.btnReloadCli.clicked.connect(clients.Clientes.reloadCli)
-        var.ui.btnBuscarCli.clicked.connect(conexion.Conexion.cargarCliente)
+        var.ui.btnBuscarCli.clicked.connect(clients.Clientes.buscarCli)
         var.ui.statusbar.addPermanentWidget(var.ui.lblStatus, 1)
         var.ui.lblStatus.setText("Bienvenido a 2º DAM")
         var.ui.toolbarBackup.triggered.connect(events.Eventos.Backup)

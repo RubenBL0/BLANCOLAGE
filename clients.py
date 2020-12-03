@@ -136,14 +136,10 @@ class Clientes():
                     cell = QtWidgets.QTableWidgetItem(registro)
                     var.ui.tableCli.setItem(row, column, cell)
                     column +=1
-                if(var.ui.lblValidar == "V"):
                     conexion.Conexion.altaCli(newcli)
                     print("añadido")
-                else:
-                    print("NO")
             else:
                 print('Faltan Datos')
-            #Clientes.limpiarCli()
         except Exception as error:
             print('Error cargar fecha lo : %s ' % str(error))
 
@@ -228,7 +224,6 @@ class Clientes():
     def reloadCli(self):
         try:
             Clientes.limpiarCli()
-            Clientes.cargarCli()
         except Exception as error:
             print("Error recargar clientes: %s" % str(error))
 
@@ -240,7 +235,7 @@ class Clientes():
 
         try:
             dni = var.ui.editDni.text()
-            cliente = conexion.Conexion.buscaCli(dni)
+            conexion.Conexion.buscaCli(dni)
         except Exception as error:
             print("Error recargar clientes: %s" % str(error))
 
