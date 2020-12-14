@@ -10,12 +10,14 @@ from PyQt5.QtPrintSupport import QPrintDialog
 
 locale.setlocale(locale.LC_ALL, 'es-ES')
 
+# Ventana de imprimir
 class PrintDialogAbrir(QPrintDialog):
     def __init__(self):
         super(PrintDialogAbrir, self).__init__()
         self.setModal(True)
 
 
+# Ventana modal de salir de la aplicación
 class DialogSalir(QtWidgets.QDialog):
     def __init__(self):
         super(DialogSalir, self).__init__()
@@ -24,6 +26,8 @@ class DialogSalir(QtWidgets.QDialog):
         var.dlgsalir.btnBoxSalir.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(events.Eventos.Salir)
         self.setModal(True)
 
+
+# Ventana del widget calendar
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
         super(DialogCalendar, self).__init__()
@@ -36,6 +40,8 @@ class DialogCalendar(QtWidgets.QDialog):
         var.dlgcalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
         self.setModal(True)
 
+
+# Ventana modal para pedir confirmación al borrar un elemento de la base de datos
 class DialogBorrar(QtWidgets.QDialog):
     def __init__(self):
         super(DialogBorrar, self).__init__()
@@ -44,10 +50,14 @@ class DialogBorrar(QtWidgets.QDialog):
         var.dlgborrar.btnBoxBorrar.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(clients.Clientes.bajaCliente)
         self.setModal(True)
 
+
+# Ventana para abrir un archivo
 class FileDialogAbrir(QtWidgets.QFileDialog):
     def __init__(self):
         super(FileDialogAbrir, self).__init__()
         self.setModal(True)
+
+
 
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
@@ -59,6 +69,7 @@ class Main(QtWidgets.QMainWindow):
         var.filedlgabrir = FileDialogAbrir()
         var.dlgimprimir = PrintDialogAbrir()
         var.dlgborrar = DialogBorrar()
+
         '''
         poner la fecha actual
         '''
@@ -104,12 +115,11 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tableCli.clicked.connect(clients.Clientes.cargarCli)
         var.ui.tableCli.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         events.Eventos.cargarProv()
+
         '''
         módulos conexion base datos
         '''
-
         conexion.Conexion.db_connect(var.filebd)
-        # conexion.Conexion()
         conexion.Conexion.mostrarClientes(self)
 
     def closeEvent(self, event):
@@ -120,5 +130,5 @@ class Main(QtWidgets.QMainWindow):
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
-    window.showMaximized()
+    window.showMaximized() # PONER SHOWMAXIMIZED()
     sys.exit(app.exec())

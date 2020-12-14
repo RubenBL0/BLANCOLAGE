@@ -1,4 +1,5 @@
-import sys, var, warning, clients
+import sys, var, clients
+
 
 class Eventos():
 
@@ -10,7 +11,6 @@ class Eventos():
         try:
             var.dlgsalir.show()
             if var.dlgsalir.exec_():
-                #print(event)
                 sys.exit()
             else:
                 var.dlgsalir.hide()
@@ -23,8 +23,7 @@ class Eventos():
         try:
             if var.dlgsalir.exec_():
                 print(event)
-                var.dlgsalir.hide()
-               #necesario para que ignore X de la ventana
+                var.dlgsalir.hide()  # Necesario para que ignore X de la ventana
         except Exception as error:
             print('Error %s' % str(error))
 
@@ -34,7 +33,7 @@ class Eventos():
         :return:
         """
         try:
-            prov = ['','A Coruña', 'Lugo', 'Ourense', 'Pontevedra', 'Vigo']
+            prov = ['', 'A Coruña', 'Lugo', 'Ourense', 'Pontevedra', 'Vigo']
             for i in prov:
                 var.ui.cmbProv.addItem(i)
 
@@ -72,7 +71,3 @@ class Eventos():
 
         except Exception as error:
             print("Error: %s" % str(error))
-
-
-
-

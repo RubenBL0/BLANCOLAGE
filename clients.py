@@ -3,7 +3,7 @@ from ventana import *
 
 class Clientes():
     '''
-    eventos necesarios formulario clientes
+    Eventos necesarios para el formulario clientes
     '''
     def validarDni(dni):
         '''
@@ -22,14 +22,14 @@ class Clientes():
                 if dni[0] in dig_ext:
                     dni = dni.replace(dni[0], reemp_dig_ext[dni[0]])
                 return len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == dig_control
-
-        except:
-            print('Error módulo validar DNI')
+        except Exception as error:
+            print('Error en el algoritmo de validación del DNI: %s' % str(error))
             return None
 
     def validoDni():
         '''
-        muestra mensaje de dni válido
+        Muestra si el DNI es válido con un V verde, y si es
+        incorrecto con una X roja, en la etiqueta lblValidar
         '''
         try:
             dni = var.ui.editDni.text()
@@ -44,104 +44,103 @@ class Clientes():
                 var.ui.editDni.setText(dni.upper())
                 return False
 
-        except:
-            print('Error módulo escribir valido DNI')
+        except Exception as error:
+            print('Error al intentar validar el DNI: %s' % str(error))
             return None
 
-    def selSexo(self):
+    def selSexo():      # Carga el valor del sexo seleccionado
         try:
             if var.ui.rbtFem.isChecked():
-                var.sex =  'Mujer'
+                var.sex = 'Mujer'
             if var.ui.rbtMasc.isChecked():
                 var.sex = 'Hombre'
         except Exception as error:
-            print('Error: %s' % str(error))
+            print('Error al seleccionar el sexo: %s' % str(error))
 
-    def selPago():
+    def selPago():      # Recoge y devuelve todos los datos marcados relacionados con el pago
         try:
             var.pay = []
             for i, data in enumerate(var.ui.grpbtnPay.buttons()):
-                    #agrupamos en QtDesigner los checkbox en un ButtonGroup
                 if data.isChecked() and i == 0:
-                   var.pay.append('Efectivo')
+                    var.pay.append('Efectivo')
                 if data.isChecked() and i == 1:
-                   var.pay.append('Tarjeta')
+                    var.pay.append('Tarjeta')
                 if data.isChecked() and i == 2:
-                   var.pay.append('Transferencia')
-            #var.pay = set(var.pay)
-            print(var.pay)
+                    var.pay.append('Transferencia')
+            print(var.pay)      # Lo imprime en consola para verificar que funciona correctamente
             return var.pay
         except Exception as error:
             print('Error: %s' % str(error))
 
 
-    def selProv(prov):
+    def selProv(prov):          # Guarda el valor seleccionado en la provincia en una variable global
         try:
-            global vpro
+            global vpro         # Definimos la variable global que contendrá la provincia
             vpro = prov
         except Exception as error:
-            print('Error: %s' % str(error))
+            print('Error en la selección de provincia: %s' % str(error))
 
 
-    def abrirCalendar(self):
+    def abrirCalendar():
         '''
         Abrir la ventana calendario
         '''
         try:
-            var.dlgcalendar.show()
+            var.dlgcalendar.show()      # Muestra la ventana del calendario
         except Exception as error:
-            print('Error: %s ' % str(error))
+            print('Error al mostrar el calendario: %s ' % str(error))
 
     def cargarFecha(qDate):
         ''''
-        Este módulo se ejecuta cuando clickeamos en un día del calendar, es decir, clicked.connect de calendar
+        Este módulo se ejecuta cuando clicamos en un día del calendar, es decir, clicked.connect de calendar
         '''
         try:
             data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
-            var.ui.editClialta.setText(str(data))
-            var.dlgcalendar.hide()
+            var.ui.editClialta.setText(str(data))       # Establecemos como texo la fecha seleccionada
+            var.dlgcalendar.hide()                      # Ocultamos la ventana tras seleccionar la fecha deseada
         except Exception as error:
-            print('Error cargar fecha: %s ' % str(error))
+            print('Error al cargar la fecha: %s ' % str(error))
 
-    def altaCliente(self):  #SE EJECUTA CON EL BOTÓN ACEPTAR
+    def altaCliente():  # Se ejecuta cuando el usuario pulsa el botón Grabar
         '''
-        cargará los clientes en la tabla y en la base de datos
-        cargará datos cliente en el resto widgets
-        en las búsquedas mostrará los datos del cliente
+        Carga los datos que introduzcamos en la base de datos y en la tabla
         :return: none
         '''
-        #preparamos el registro
+        # Preparamos los datos
         try:
-            newcli = [] #contiene todos los datos
-            clitab = []  #será lo que carguemos en la tablas
+            newcli = []     # Todos los datos del cliente
+            clitab = []     # Los 3 datos que se visualizarán en la tabla
             client = [var.ui.editDni, var.ui.editApel, var.ui.editNome, var.ui.editClialta, var.ui.editDir]
             k = 0
             for i in client:
-                newcli.append(i.text())  #cargamos los valores que hay en los editline
-                if k < 3:
+                newcli.append(i.text())     # Así cargamos los editLine
+                if k < 3:                   # Bucle que solo garga los 3 datos que visualizaremos en la tabla
                     clitab.append(i.text())
                     k += 1
+
+            print(clitab)
             newcli.append(vpro)
             newcli.append(var.sex)
             var.pay2 = Clientes.selPago()
             newcli.append(var.pay2)
-            newcli.append(var.ui.spinEdad.value())
-            if client:
-            #comprobarmos que no esté vacío lo principal
-            #aquí empieza como trabajar con la TableWidget
-                row = 0
-                column = 0
-                var.ui.tableCli.insertRow(row)
-                for registro in clitab:
-                    cell = QtWidgets.QTableWidgetItem(registro)
-                    var.ui.tableCli.setItem(row, column, cell)
-                    column +=1
+            newcli.append(var.ui.spinEdad.value())      # Así cargamos el spinner
+            if client:  # Comprobar que no está vacío
+                if(Clientes.validarDni(var.ui.editDni.text) == False):
+                    print("No se puede añadir")
+                else:
+                    row = 0
+                    column = 0
+                    var.ui.tableCli.insertRow(row)
+                    for registro in clitab:
+                        cell = QtWidgets.QTableWidgetItem(registro)
+                        var.ui.tableCli.setItem(row, column, cell)
+                        column +=1
                     conexion.Conexion.altaCli(newcli)
                     print("añadido")
             else:
                 print('Faltan Datos')
         except Exception as error:
-            print('Error cargar fecha lo : %s ' % str(error))
+            print('Error al dar de alta al cliente: %s ' % str(error))
 
     def limpiarCli():
         '''
@@ -152,7 +151,7 @@ class Clientes():
             client = [var.ui.editDni, var.ui.editApel, var.ui.editNome, var.ui.editClialta, var.ui.editDir]
             for i in range(len(client)):
                 client[i].setText('')
-            var.ui.grpbtnSex.setExclusive(False)  #necesario para los radiobutton
+            var.ui.grpbtnSex.setExclusive(False)  # Para que solo se pueda añadir un valor en los Radio Buttons
             for dato in var.rbtsex:
                 dato.setChecked(False)
             for data in var.chkpago:
@@ -191,8 +190,8 @@ class Clientes():
         try:
             dni = var.ui.editDni.text()
             conexion.Conexion.bajaCli(dni)
-            conexion.Conexion.mostrarClientes(self)
             Clientes.limpiarCli()
+            conexion.Conexion.mostrarClientes(None)
             var.ui.lblStatus.setText("Cliente con DNI " + dni + " dado de baja")
 
         except Exception as error:

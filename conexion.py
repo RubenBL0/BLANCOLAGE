@@ -30,7 +30,7 @@ class Conexion():
         if query.exec_():
             print("Inserción Correcta")
             var.ui.lblStatus.setText("Alta cliente con DNI " + str(cliente[0]))
-            Conexion.mostrarClientes()
+            Conexion.mostrarClientes(None)
         else:
             print("Error: aqui", query.lastError().text())
 
@@ -65,6 +65,8 @@ class Conexion():
                     var.chkpago[2].setChecked(True)
 
     def mostrarClientes(self):
+        while var.ui.tableCli.rowCount() > 0:   # Fundamental para que no quede el valor mal borrado de la tabla
+            var.ui.tableCli.removeRow(0)
         index = 0
         query = QtSql.QSqlQuery()
         query.prepare('select dni, apellidos, nombre from clientes')
@@ -95,7 +97,7 @@ class Conexion():
             print("Baja cliente")
 
         else:
-            print("Error mostrar clientes: ", query.lastError().text())
+            print("Error al dar de baja el clientes: ", query.lastError().text())
 
     def modifCli(codigo, newdata):
         ''''
