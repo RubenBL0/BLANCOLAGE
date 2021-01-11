@@ -1,14 +1,21 @@
 from ventana import *
+from about import *
 from warning import *
 from vencalendar import *
 from ventanaborrar import *
 from datetime import datetime, date
-import sys, var, events, clients, conexion
+import sys, var, events, clients, conexion, products
 import locale
 from PyQt5.QtPrintSupport import QPrintDialog
 
 
 locale.setlocale(locale.LC_ALL, 'es-ES')
+
+class DialogAbout(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogAbout, self).__init__()
+        var.dlgabout = Ui_dialogAbout()
+        var.dlgabout.setupUi(self)
 
 # Ventana de imprimir
 class PrintDialogAbrir(QPrintDialog):
@@ -50,7 +57,6 @@ class DialogBorrar(QtWidgets.QDialog):
         var.dlgborrar.btnBoxBorrar.button(QtWidgets.QDialogButtonBox.Yes).clicked.connect(clients.Clientes.bajaCliente)
         self.setModal(True)
 
-
 # Ventana para abrir un archivo
 class FileDialogAbrir(QtWidgets.QFileDialog):
     def __init__(self):
@@ -69,6 +75,7 @@ class Main(QtWidgets.QMainWindow):
         var.filedlgabrir = FileDialogAbrir()
         var.dlgimprimir = PrintDialogAbrir()
         var.dlgborrar = DialogBorrar()
+        var.dlgabout = DialogAbout()
 
         '''
         poner la fecha actual
@@ -86,6 +93,7 @@ class Main(QtWidgets.QMainWindow):
         estamos conectando el código con la interfaz gráfico
         botones formulario cliente
         '''
+        var.ui.actionAbout.triggered.connect(events.Eventos.About)
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.editDni.editingFinished.connect(lambda: clients.Clientes.validoDni())
@@ -117,10 +125,22 @@ class Main(QtWidgets.QMainWindow):
         events.Eventos.cargarProv()
 
         '''
+        funciones de productos
+        '''
+        var.ui.btnGrabarProd.clicked.connect(products.Productos.altaProd)
+        var.ui.tableProd.clicked.connect(products.Productos.cargarProd)
+        var.ui.tableProd.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.btnLimpProd.clicked.connect(products.Productos.limpiarProd)
+        var.ui.btnElimProd.clicked.connect(products.Productos.bajaProd)
+        var.ui.btnModProd.clicked.connect(products.Productos.modifProd)
+        var.ui.btnSalirProd.clicked.connect(events.Eventos.Salir)
+
+        '''
         módulos conexion base datos
         '''
         conexion.Conexion.db_connect(var.filebd)
         conexion.Conexion.mostrarClientes(self)
+        conexion.Conexion.mostrarProductos(self)
 
     def closeEvent(self, event):
         if event:

@@ -13,3 +13,5 @@ global DATABASE
 global filedlgabrir
 global dlgimprimir
 global dlgborrar
+global dlgabout
+global dlgborrarprod

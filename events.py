@@ -1,7 +1,10 @@
-import sys, var, clients
+import sys, var, clients, products
 
 
 class Eventos():
+
+    def About(event):
+        var.dlgabout.show()
 
     def Salir(event):
         '''

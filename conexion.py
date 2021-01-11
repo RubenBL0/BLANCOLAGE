@@ -14,6 +14,71 @@ class Conexion():
             print('Conexión Establecida')
         return True
 
+    def altaProd(producto):
+        query = QtSql.QSqlQuery()
+        query.prepare('insert into articulos (nome, prezo)'
+                      'VALUES(:nome, :prezo)')
+        query.bindValue(':nome', str(producto[0]))
+        query.bindValue(':prezo', str(producto[1]))
+        if query.exec_():
+            print("Producto dado de alta satisfactoriamente")
+            var.ui.lblStatus.setText("Producto " + str(producto[0]) + " dado de alta")
+
+    def cargarProducto():
+        codigo = var.ui.lblCodProd.text()
+        query = QtSql.QSqlQuery()
+        query.prepare('select codigo, nome, prezo from articulos where codigo = :codigo')
+        query.bindValue(':codigo', codigo)
+        if query.exec_():
+            while query.next():
+                print(str(query.value(0)))
+                var.ui.lblCodProd.setText(str(query.value(0)))
+                var.ui.editNomeProd.setText(str(query.value(1)))
+                var.ui.editPrezoProd.setText(str(query.value(2)))
+
+    def mostrarProductos(self):
+        while var.ui.tableProd.rowCount() > 0:   # Fundamental para que no quede el valor mal borrado de la tabla
+            var.ui.tableProd.removeRow(0)
+        index = 0
+        query = QtSql.QSqlQuery()
+        query.prepare('select codigo, nome, prezo from articulos')
+        if query.exec_():
+            while query.next():
+                codigo = str(query.value(0))
+                nome = query.value(1)
+                prezo = query.value(2)
+                var.ui.tableProd.setRowCount(index+1)
+                var.ui.tableProd.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
+                var.ui.tableProd.setItem(index, 1, QtWidgets.QTableWidgetItem(nome))
+                var.ui.tableProd.setItem(index, 2, QtWidgets.QTableWidgetItem(prezo))
+                index += 1
+        else:
+            print("Error mostrar clientes: ", query.lastError().text())
+
+    def bajaProd(codigo):
+
+        query = QtSql.QSqlQuery()
+        query.prepare('delete from articulos where codigo = :codigo')
+        query.bindValue(":codigo", codigo)
+        if query.exec_():
+            print("Baja producto")
+            var.ui.lblStatus.setText("Producto con código " + str(codigo) + " dado de baja")
+        else:
+            print("Error al dar de baja el producto: ", query.lastError().text())
+
+    def modifProd(codigo, newdata):
+        query = QtSql.QSqlQuery()
+        codigo = int(codigo)
+        query.prepare('update articulos set nome=:nome, prezo=:prezo where codigo=:codigo')
+        query.bindValue(':codigo', int(codigo))
+        query.bindValue(':nome', str(newdata[0]))
+        query.bindValue(':prezo', str(newdata[1]))
+        if query.exec_():
+            print('Producto modificado')
+            var.ui.lblStatus.setText('Producto con código ' + str(codigo) + ' modificado')
+        else:
+            print("Error modificar productos: ", query.lastError().text())
+
     def altaCli(cliente):
         query = QtSql.QSqlQuery()
         query.prepare('insert into clientes (dni, apellidos, nombre, fechalta, direccion, provincia, sexo, formapago, edad)'
@@ -32,7 +97,7 @@ class Conexion():
             var.ui.lblStatus.setText("Alta cliente con DNI " + str(cliente[0]))
             Conexion.mostrarClientes(None)
         else:
-            print("Error: aqui", query.lastError().text())
+            print("Error: ", query.lastError().text())
 
     def cargarCliente():
         dni = var.ui.editDni.text()

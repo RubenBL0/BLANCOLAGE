@@ -29,7 +29,7 @@ class Ui_DialogBorrar(object):
         self.btnBoxBorrar.setCenterButtons(True)
         self.btnBoxBorrar.setObjectName("btnBoxBorrar")
         self.label = QtWidgets.QLabel(DialogBorrar)
-        self.label.setGeometry(QtCore.QRect(160, 50, 221, 31))
+        self.label.setGeometry(QtCore.QRect(180, 70, 221, 31))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -50,4 +50,4 @@ class Ui_DialogBorrar(object):
     def retranslateUi(self, DialogBorrar):
         _translate = QtCore.QCoreApplication.translate
         DialogBorrar.setWindowTitle(_translate("DialogBorrar", "Dialog"))
-        self.label.setText(_translate("DialogBorrar", "¿Seguro que quiere borrar al usuario?"))
+        self.label.setText(_translate("DialogBorrar", "¿Seguro que quiere eliminarlo?"))
