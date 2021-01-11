@@ -4,7 +4,7 @@ from warning import *
 from vencalendar import *
 from ventanaborrar import *
 from datetime import datetime, date
-import sys, var, events, clients, conexion, products
+import sys, var, events, clients, conexion, products, printer
 import locale
 from PyQt5.QtPrintSupport import QPrintDialog
 
@@ -111,6 +111,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.toolbarAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.toolbarImprimir.triggered.connect(events.Eventos.Imprimir)
+        var.ui.actionInforme.triggered.connect(printer.Printer.reportCli)
         var.ui.spinEdad.setValue(18)
         var.ui.spinEdad.setMaximum(65)
         var.ui.spinEdad.setMinimum(16)

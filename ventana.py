@@ -699,7 +699,10 @@ class Ui_VenPrincipal(object):
         self.toolbarImprimir.setObjectName("toolbarImprimir")
         self.actionAbout = QtWidgets.QAction(VenPrincipal)
         self.actionAbout.setObjectName("actionAbout")
+        self.actionInforme = QtWidgets.QAction(VenPrincipal)
+        self.actionInforme.setObjectName("actionInforme")
         self.menuArchivo.addAction(self.actionAbrir)
+        self.menuArchivo.addAction(self.actionInforme)
         self.menuArchivo.addSeparator()
         self.menuArchivo.addAction(self.actionSalir)
         self.menuAyuda.addAction(self.actionAbout)
@@ -712,7 +715,7 @@ class Ui_VenPrincipal(object):
         self.toolBar.addAction(self.toolbarSalir)
 
         self.retranslateUi(VenPrincipal)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(VenPrincipal)
         VenPrincipal.setTabOrder(self.editDni, self.btnBuscarCli)
         VenPrincipal.setTabOrder(self.btnBuscarCli, self.btnReloadCli)
@@ -798,6 +801,8 @@ class Ui_VenPrincipal(object):
         self.toolbarImprimir.setText(_translate("VenPrincipal", "toolbarImpresora"))
         self.toolbarImprimir.setToolTip(_translate("VenPrincipal", "Imprimir"))
         self.actionAbout.setText(_translate("VenPrincipal", "About"))
+        self.actionInforme.setText(_translate("VenPrincipal", "Informe"))
+        self.actionInforme.setShortcut(_translate("VenPrincipal", "Ctrl+I"))
 import backup_rc
 import calendar_rc
 import carpeta_rc

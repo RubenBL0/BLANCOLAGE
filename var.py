@@ -15,3 +15,4 @@ global dlgimprimir
 global dlgborrar
 global dlgabout
 global dlgborrarprod
+global rep
