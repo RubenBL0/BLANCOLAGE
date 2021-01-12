@@ -1306,7 +1306,6 @@
      <string>Archivo</string>
     </property>
     <addaction name="actionAbrir"/>
-    <addaction name="actionInforme"/>
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
@@ -1316,8 +1315,16 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuInformes">
+    <property name="title">
+     <string>Informes</string>
+    </property>
+    <addaction name="actionInformeClientes"/>
+    <addaction name="actionInformeProductos"/>
+   </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuAyuda"/>
+   <addaction name="menuInformes"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -1432,12 +1439,14 @@
     <string>About</string>
    </property>
   </action>
-  <action name="actionInforme">
+  <action name="actionInformeClientes">
    <property name="text">
-    <string>Informe</string>
+    <string>Informe de clientes</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+I</string>
+  </action>
+  <action name="actionInformeProductos">
+   <property name="text">
+    <string>Informe de productos</string>
    </property>
   </action>
  </widget>

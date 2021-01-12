@@ -111,7 +111,6 @@ class Main(QtWidgets.QMainWindow):
         var.ui.toolbarAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.toolbarImprimir.triggered.connect(events.Eventos.Imprimir)
-        var.ui.actionInforme.triggered.connect(printer.Printer.reportCli)
         var.ui.spinEdad.setValue(18)
         var.ui.spinEdad.setMaximum(65)
         var.ui.spinEdad.setMinimum(16)
@@ -143,6 +142,11 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.mostrarClientes(self)
         conexion.Conexion.mostrarProductos(self)
 
+        '''
+        módulos para informes
+        '''
+        var.ui.actionInformeClientes.triggered.connect(printer.Printer.reportCli)
+        var.ui.actionInformeProductos.triggered.connect(printer.Printer.reportProductos)
     def closeEvent(self, event):
         if event:
             events.Eventos.Salir(event)
