@@ -16,10 +16,11 @@ class Conexion():
 
     def altaProd(producto):
         query = QtSql.QSqlQuery()
-        query.prepare('insert into articulos (nome, prezo)'
-                      'VALUES(:nome, :prezo)')
+        query.prepare('insert into articulos (nome, prezo, stock)'
+                      'VALUES(:nome, :prezo, :stock)')
         query.bindValue(':nome', str(producto[0]))
         query.bindValue(':prezo', str(producto[1]))
+        query.bindValue(':stock', str(producto[2]))
         if query.exec_():
             print("Producto dado de alta satisfactoriamente")
             var.ui.lblStatus.setText("Producto " + str(producto[0]) + " dado de alta")
@@ -27,7 +28,7 @@ class Conexion():
     def cargarProducto():
         codigo = var.ui.lblCodProd.text()
         query = QtSql.QSqlQuery()
-        query.prepare('select codigo, nome, prezo from articulos where codigo = :codigo')
+        query.prepare('select codigo, nome, prezo, stock from articulos where codigo = :codigo')
         query.bindValue(':codigo', codigo)
         if query.exec_():
             while query.next():
@@ -35,22 +36,25 @@ class Conexion():
                 var.ui.lblCodProd.setText(str(query.value(0)))
                 var.ui.editNomeProd.setText(str(query.value(1)))
                 var.ui.editPrezoProd.setText(str(query.value(2)))
+                var.ui.editStockProd.setText(str(query.value(3)))
 
     def mostrarProductos(self):
         while var.ui.tableProd.rowCount() > 0:   # Fundamental para que no quede el valor mal borrado de la tabla
             var.ui.tableProd.removeRow(0)
         index = 0
         query = QtSql.QSqlQuery()
-        query.prepare('select codigo, nome, prezo from articulos')
+        query.prepare('select codigo, nome, prezo, stock from articulos')
         if query.exec_():
             while query.next():
                 codigo = str(query.value(0))
                 nome = query.value(1)
                 prezo = query.value(2)
+                stock = query.value(3)
                 var.ui.tableProd.setRowCount(index+1)
                 var.ui.tableProd.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
                 var.ui.tableProd.setItem(index, 1, QtWidgets.QTableWidgetItem(nome))
                 var.ui.tableProd.setItem(index, 2, QtWidgets.QTableWidgetItem(prezo))
+                var.ui.tableProd.setItem(index, 3, QtWidgets.QTableWidgetItem(stock))
                 index += 1
         else:
             print("Error mostrar clientes: ", query.lastError().text())
@@ -69,10 +73,11 @@ class Conexion():
     def modifProd(codigo, newdata):
         query = QtSql.QSqlQuery()
         codigo = int(codigo)
-        query.prepare('update articulos set nome=:nome, prezo=:prezo where codigo=:codigo')
+        query.prepare('update articulos set nome=:nome, prezo=:prezo, stock=:stock where codigo=:codigo')
         query.bindValue(':codigo', int(codigo))
         query.bindValue(':nome', str(newdata[0]))
         query.bindValue(':prezo', str(newdata[1]))
+        query.bindValue(':stock', str(newdata[2]))
         if query.exec_():
             print('Producto modificado')
             var.ui.lblStatus.setText('Producto con código ' + str(codigo) + ' modificado')

@@ -98,7 +98,7 @@ class Printer():
             Printer.cabecera(self)
             Printer.cabeceraProd(self)
             query = QtSql.QSqlQuery()
-            query.prepare('select codigo, nome, prezo from articulos order by apellidos, nombre')
+            query.prepare('select codigo, nome, prezo, stock from articulos order by codigo')
             if query.exec_():
                 i = 50
                 j = 690
@@ -113,10 +113,9 @@ class Printer():
                     j = 690
                 var.rep.setFont('Helvetica', size=10)
                 var.rep.drawString(i, j, str(query.value(0)))
-                var.rep.drawString(i + 30, j, str(query.value(1)))
-                var.rep.drawString(i + 170, j, str(query.value(2)))
-                var.rep.drawString(i + 320, j, str(query.value(3)))
-                var.rep.drawRightString(i + 470, j, str(query.value(4)))
+                var.rep.drawString(i + 125, j, str(query.value(1)))
+                var.rep.drawRightString(i + 315, j, str(query.value(2)))
+                var.rep.drawRightString(i + 450, j, str(query.value(3)))
                 j = j - 25
 
             var.rep.save()

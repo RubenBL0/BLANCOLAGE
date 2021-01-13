@@ -7,13 +7,13 @@ class Productos():
     '''
     def altaProd():
         try:
-            prod = [var.ui.editNomeProd, var.ui.editPrezoProd]
+            prod = [var.ui.editNomeProd, var.ui.editPrezoProd, var.ui.editStockProd]
             newprod = []
 
             for i in prod:
                 newprod.append(i.text())
 
-            if (newprod[0] == "" or newprod[1] == ""):
+            if (newprod[0] == "" or newprod[1] == "" or newprod[2] == ""):
                 print("Faltan datos")
 
             else:
@@ -28,7 +28,7 @@ class Productos():
     def cargarProd():
         try:
             fila = var.ui.tableProd.selectedItems()
-            prod = [var.ui.lblCodProd, var.ui.editPrezoProd, var.ui.editPrezoProd]
+            prod = [var.ui.lblCodProd, var.ui.editPrezoProd, var.ui.editPrezoProd, var.ui.editStockProd]
             if fila:
                 fila = [dato.text() for dato in fila]
             i = 0
@@ -40,7 +40,7 @@ class Productos():
 
     def limpiarProd():
         try:
-            prod = [var.ui.lblCodProd, var.ui.editNomeProd, var.ui.editPrezoProd]
+            prod = [var.ui.lblCodProd, var.ui.editNomeProd, var.ui.editPrezoProd, var.ui.editStockProd]
             for i in range(len(prod)):
                 prod[i].setText('')
             var.ui.lblStatus.setText("Bienvenido a 2º DAM")
@@ -61,7 +61,7 @@ class Productos():
     def modifProd(self):
         try:
             newdata = []
-            prod = [var.ui.editNomeProd, var.ui.editPrezoProd]
+            prod = [var.ui.editNomeProd, var.ui.editPrezoProd, var.ui.editStockProd]
             for i in prod:
                 newdata.append(i.text())
             cod = var.ui.lblCodProd.text()
