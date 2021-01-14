@@ -4,7 +4,7 @@ from warning import *
 from vencalendar import *
 from ventanaborrar import *
 from datetime import datetime, date
-import sys, var, events, clients, conexion, products, printer
+import sys, var, events, clients, conexion, products, printer, facturas
 import locale
 from PyQt5.QtPrintSupport import QPrintDialog
 
@@ -34,7 +34,7 @@ class DialogSalir(QtWidgets.QDialog):
         self.setModal(True)
 
 
-# Ventana del widget calendar
+# Ventana del widget calendar para clientes
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
         super(DialogCalendar, self).__init__()
@@ -47,6 +47,18 @@ class DialogCalendar(QtWidgets.QDialog):
         var.dlgcalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
         self.setModal(True)
 
+# Ventana del widget calendar para facturas
+class DialogCalendarFactura(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogCalendarFactura, self).__init__()
+        var.dlgcalendar = Ui_dlgCalendar()
+        var.dlgcalendar.setupUi(self)
+        diaactual = datetime.now().day
+        mesactual = datetime.now().month
+        anoactual = datetime.now().year
+        var.dlgcalendar.Calendar.setSelectedDate((QtCore.QDate(anoactual, mesactual, diaactual)))
+        var.dlgcalendar.Calendar.clicked.connect(facturas.Facturas.cargarFecha)
+        self.setModal(True)
 
 # Ventana modal para pedir confirmación al borrar un elemento de la base de datos
 class DialogBorrar(QtWidgets.QDialog):
@@ -76,6 +88,7 @@ class Main(QtWidgets.QMainWindow):
         var.dlgimprimir = PrintDialogAbrir()
         var.dlgborrar = DialogBorrar()
         var.dlgabout = DialogAbout()
+        var.dlgcalendarfact = DialogCalendarFactura()
 
         '''
         poner la fecha actual
@@ -134,6 +147,11 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnElimProd.clicked.connect(products.Productos.bajaProd)
         var.ui.btnModProd.clicked.connect(products.Productos.modifProd)
         var.ui.btnSalirProd.clicked.connect(events.Eventos.Salir)
+
+        '''
+        funciones de facturas
+        '''
+        var.ui.btnFechaFact.clicked.connect(facturas.Facturas.abrirCalendar)
 
         '''
         módulos conexion base datos

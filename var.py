@@ -5,6 +5,7 @@ global chkpago
 #las dos siguientes son ventanas dialogo
 global dlgsalir
 global dlgcalendar
+global dlgcalendarfact
 global sex
 pay = []
 pay2 = []
