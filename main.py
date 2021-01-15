@@ -152,6 +152,8 @@ class Main(QtWidgets.QMainWindow):
         funciones de facturas
         '''
         var.ui.btnFechaFact.clicked.connect(facturas.Facturas.abrirCalendar)
+        var.ui.btnReloadFact.clicked.connect(facturas.Facturas.limpiarFactura)
+        var.ui.btnFactura.clicked.connect(facturas.Facturas.altaFactura)
 
         '''
         módulos conexion base datos
@@ -159,6 +161,7 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.db_connect(var.filebd)
         conexion.Conexion.mostrarClientes(self)
         conexion.Conexion.mostrarProductos(self)
+        conexion.Conexion.mostrarFacturas(self)
 
         '''
         módulos para informes

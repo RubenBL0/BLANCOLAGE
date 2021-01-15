@@ -1540,8 +1540,8 @@
              <font>
               <family>MS Shell Dlg 2</family>
               <pointsize>8</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
+              <weight>50</weight>
+              <bold>false</bold>
              </font>
             </property>
             <property name="styleSheet">
@@ -1644,7 +1644,7 @@
          </layout>
         </item>
         <item row="2" column="0">
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableWidget" name="tabFacturas">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1693,7 +1693,7 @@
          </widget>
         </item>
         <item row="2" column="1" colspan="4">
-         <widget class="QTableWidget" name="tableWidget_2">
+         <widget class="QTableWidget" name="tabVentas">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>

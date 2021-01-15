@@ -14,6 +14,16 @@ class Conexion():
             print('Conexión Establecida')
         return True
 
+    def altaFact(factura):
+        query = QtSql.QSqlQuery()
+        query.prepare('insert into facturas (dni, fecha, apellidos)'
+                       'VALUES(:dni, :fecha, :apellidos)')
+        query.bindValue(':dni', str(factura[0]))
+        query.bindValue(':fecha', str(factura[2]))
+        query.bindValue(':apellidos', str(factura[1]))
+        if query.exec_():
+            print("Factura dada de alta satisfactoriamente")
+
     def altaProd(producto):
         query = QtSql.QSqlQuery()
         query.prepare('insert into articulos (nome, prezo, stock)'
@@ -24,6 +34,25 @@ class Conexion():
         if query.exec_():
             print("Producto dado de alta satisfactoriamente")
             var.ui.lblStatus.setText("Producto " + str(producto[0]) + " dado de alta")
+
+    def mostrarFacturas(self):
+        while var.ui.tabFacturas.rowCount() > 0:
+            var.ui.tabFacturas.removeRow(0)
+        index = 0
+        query = QtSql.QSqlQuery()
+        query.prepare('select codfactura, fecha from facturas')
+        if query.exec_():
+            while query.next():
+                cod = str(query.value(0))
+                fecha = query.value(1)
+                var.ui.tabFacturas.setRowCount(index + 1)
+                var.ui.tabFacturas.setItem(index, 0, QtWidgets.QTableWidgetItem(cod))
+                var.ui.tabFacturas.setItem(index, 1, QtWidgets.QTableWidgetItem(fecha))
+                index += 1
+        else:
+            print("Error mostrar facturas")
+
+
 
     def cargarProducto():
         codigo = var.ui.lblCodProd.text()
@@ -112,7 +141,9 @@ class Conexion():
         if query.exec_():
             while query.next():
                 var.ui.lblCodcli.setText(str(query.value(0)))
+                var.ui.editDniFact.setText(str(query.value(1)))
                 var.ui.editDni.setText(str(query.value(1)))
+                var.ui.editApelFact.setText(str(query.value(2)))
                 var.ui.editApel.setText(str(query.value(2)))
                 var.ui.editNome.setText(str(query.value(3)))
                 var.ui.editClialta.setText(str(query.value(4)))
