@@ -74,3 +74,6 @@ class Facturas():
         try:
             dni = var.ui.editDniFact.text()
             conexion.Conexion.buscarFactura(dni)
+
+        except Exception as error:
+            print('Error al buscar el cliente: %s' % str(error))
