@@ -154,6 +154,10 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnFechaFact.clicked.connect(facturas.Facturas.abrirCalendar)
         var.ui.btnReloadFact.clicked.connect(facturas.Facturas.limpiarFactura)
         var.ui.btnFactura.clicked.connect(facturas.Facturas.altaFactura)
+        var.ui.tabFacturas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.tabFacturas.clicked.connect(facturas.Facturas.cargarFactura)
+        var.ui.btnAnular.clicked.connect(facturas.Facturas.borrarFactura)
+        var.ui.bntBuscarFact.clicked.connect(facturas.Facturas.buscarFactura)
 
         '''
         módulos conexion base datos

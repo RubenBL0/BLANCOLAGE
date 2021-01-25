@@ -23,6 +23,7 @@ class Conexion():
         query.bindValue(':apellidos', str(factura[1]))
         if query.exec_():
             print("Factura dada de alta satisfactoriamente")
+            Conexion.mostrarFacturas(None)
 
     def altaProd(producto):
         query = QtSql.QSqlQuery()
@@ -52,7 +53,22 @@ class Conexion():
         else:
             print("Error mostrar facturas")
 
+    def cargarFactura():
+        query = QtSql.QSqlQuery()
+        query.prepare('select dni, fecha, apellidos from facturas where codfactura = :codfactura')
+        query.bindValue(':codfactura', var.ui.lblCodFact.text())
+        if query.exec_():
+            while(query.next()):
+                var.ui.editDniFact.setText(str(query.value(0)))
+                var.ui.editFechaFact.setText(str(query.value(1)))
+                var.ui.editApelFact.setText(str(query.value(2)))
 
+    def bajaFactura(codfact):
+        query = QtSql.QSqlQuery()
+        query.prepare('delete from facturas where codfactura = :codfactura')
+        query.bindValue(':codfactura', codfact)
+        if query.exec_():
+            print('Factura eliminada satisfactoriamente')
 
     def cargarProducto():
         codigo = var.ui.lblCodProd.text()

@@ -45,5 +45,32 @@ class Facturas():
 
             print(newfact)
             conexion.Conexion.altaFact(newfact)
+            conexion.Conexion.mostrarFacturas()
         except Exception as error:
             print("Error %s: " % str(error))
+
+    def cargarFactura():
+        '''
+        Carga los datos seleccionados en la tabla en el formulario de facturas
+        '''
+        try:
+            fila = var.ui.tabFacturas.selectedItems()
+            var.ui.lblCodFact.setText(fila[0].text())
+            conexion.Conexion.cargarFactura()
+        except Exception as error:
+            print('Error al cargar factura %s' % str(error))
+
+    def borrarFactura():
+        try:
+            codfact = var.ui.lblCodFact.text()
+            conexion.Conexion.bajaFactura(codfact)
+            Facturas.limpiarFactura()
+            conexion.Conexion.mostrarFacturas(None)
+
+        except Exception as error:
+            print('Error al eliminar la factura: %s' % str(error))
+
+    def buscarFactura():
+        try:
+            dni = var.ui.editDniFact.text()
+            conexion.Conexion.buscarFactura(dni)
