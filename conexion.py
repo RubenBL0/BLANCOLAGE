@@ -70,6 +70,16 @@ class Conexion():
         if query.exec_():
             print('Factura eliminada satisfactoriamente')
 
+    def buscarFactura(dni):
+        query = QtSql.QSqlQuery()
+        query.prepare('select * from facturas where dni = :dni')
+        query.bindValue(':dni', dni)
+        if query.exec_():
+            while query.next():
+                var.ui.lblCodFact.setText(query.value(0))
+                var.ui.editFechaFact.setText(query.value(2))
+                var.ui.editApelFact.setText(str(query.value(3)))
+
     def cargarProducto():
         codigo = var.ui.lblCodProd.text()
         query = QtSql.QSqlQuery()
@@ -273,4 +283,13 @@ class Conexion():
                     var.chkpago[1].setChecked(True)
                 if 'Transferencia' in query.value(8):
                     var.chkpago[2].setChecked(True)
+
+    def cargarCmbventa(cmbVenta):
+        var.cmbVenta.clear()
+        query = QtSql.QSqlQuery()
+        var.cmbVenta.addItem('')
+        query.prepare('select codigo, producto from productos order by producto')
+        if query.exec_():
+            while query.next():
+                var.cmbventa.addItem(str(query.value(1)))
 

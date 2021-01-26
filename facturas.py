@@ -77,3 +77,21 @@ class Facturas():
 
         except Exception as error:
             print('Error al buscar el cliente: %s' % str(error))
+
+    def prepararTablaventas(index):
+        '''
+        Modulo que prepara tabla Ventas, carga un combo en la tabla
+        y carga dicho combo con los datos del producto
+        :return:
+        '''
+        try:
+            var.cmbventa = QtWidgets.QComboBox()
+            conexion.Conexion.cargarCmbventa(var.cmbventa)
+            var.ui.tabVenta.setRowCount(index + 1)
+            var.ui.tabVenta.setItem(index, 0, QtWidgets.QTableWidgetItem())
+            var.ui.tabVenta.setCellWidget(index, 1, var.cmbventa)
+            var.ui.tabVenta.setItem(index, 2, QtWidgets.QTableWidgetItem())
+            var.ui.tabVenta.setItem(index, 3, QtWidgets.QTableWidgetItem())
+            var.ui.tabVenta.setItem(index, 4, QtWidgets.QTableWidgetItem())
+        except Exception as error:
+            print('Error Preparar tabla de ventas: %s ' % str(error))

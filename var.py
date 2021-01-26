@@ -17,3 +17,4 @@ global dlgborrar
 global dlgabout
 global dlgborrarprod
 global rep
+global cmbVenta

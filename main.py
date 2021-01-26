@@ -60,6 +60,11 @@ class DialogCalendarFactura(QtWidgets.QDialog):
         var.dlgcalendar.Calendar.clicked.connect(facturas.Facturas.cargarFecha)
         self.setModal(True)
 
+class CmbVenta(QtWidgets.QComboBox):
+    def __init__(self):
+        super(CmbVenta, self).__init__()
+        var.cmbventa = QtWidgets.QComboBox()
+
 # Ventana modal para pedir confirmación al borrar un elemento de la base de datos
 class DialogBorrar(QtWidgets.QDialog):
     def __init__(self):
@@ -76,7 +81,6 @@ class FileDialogAbrir(QtWidgets.QFileDialog):
         self.setModal(True)
 
 
-
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
         super(Main, self).__init__()
@@ -89,6 +93,7 @@ class Main(QtWidgets.QMainWindow):
         var.dlgborrar = DialogBorrar()
         var.dlgabout = DialogAbout()
         var.dlgcalendarfact = DialogCalendarFactura()
+        var.cmbVenta = QtWidgets.QComboBox()
 
         '''
         poner la fecha actual
@@ -166,6 +171,7 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.mostrarClientes(self)
         conexion.Conexion.mostrarProductos(self)
         conexion.Conexion.mostrarFacturas(self)
+        conexion.Conexion.cargarCmbventa(var.cmbVenta)
 
         '''
         módulos para informes
