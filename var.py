@@ -1,20 +1,50 @@
+'''
+VARIABLES
+'''
+
+'''
+Ventana
+'''
 global ui
-#a continuación listas de los rbtbutton y check pago
-global rbtsex
-global chkpago
-#las dos siguientes son ventanas dialogo
+
+
+'''
+Ventanas de diálogo
+'''
 global dlgsalir
 global dlgcalendar
 global dlgcalendarfact
-global sex
-pay = []
-pay2 = []
-filebd = 'empresa.db'
-global DATABASE
 global filedlgabrir
 global dlgimprimir
 global dlgborrar
 global dlgabout
 global dlgborrarprod
+
+
+'''
+Atributos de clientes
+'''
+global rbtsex
+global chkpago
+global sex
+pay = []
+pay2 = []
+
+
+'''
+Variable para hacer los reportes
+'''
 global rep
+
+
+'''
+Combobox de ventas
+'''
 global cmbVenta
+
+
+'''
+Base de datos
+'''
+filebd = 'empresa.db'
+global DATABASE

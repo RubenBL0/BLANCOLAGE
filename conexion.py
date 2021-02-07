@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets, QtSql
-import var
+import var, facturas
 from ventana import *
 
 class Conexion():
@@ -14,13 +14,89 @@ class Conexion():
             print('Conexión Establecida')
         return True
 
-    def altaFact(factura):
+    def mostrarVentas(codigo):
+        try:
+            var.ui.tabVentas.clearContents()
+            var.subfac = 0.00
+            query = QtSql.QSqlQuery()
+            query1 = QtSql.QSqlQuery()
+            query.prepare('select codventa, codarticventa, cantidad from ventas where codfacventa = :codigo')
+            query.bindValue(':codigo', int(codigo))
+            if query.exec_():
+                index = 0
+                while query.next():
+                    codventa = query.value(0)
+                    codartic = query.value(1)
+                    cantidad = query.value(2)
+                    var.ui.tabVentas.setRowCount(index + 1)
+                    var.ui.tabVentas.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codventa)))
+                    query1.prepare('select nome, prezo from articulos where codigo = :codartic')
+                    query1.bindValue(':codartic', int(codartic))
+                    if query1.exec_():
+                        while query1.next():
+                            articulo = query1.value(0)
+                            precio = query1.value(1)
+                            var.ui.tabVentas.setItem(index, 1, QtWidgets.QTableWidgetItem(str(articulo)))
+                            var.ui.tabVentas.setItem(index, 2, QtWidgets.QTableWidgetItem(str(cantidad)))
+                            subtotal = round(float(cantidad) * float(precio), 2)
+                            var.ui.tabVentas.setItem(index, 3, QtWidgets.QTableWidgetItem("{0:.2f}".format(float(precio)) + ' €'))
+                            var.ui.tabVentas.setItem(index, 4, QtWidgets.QTableWidgetItem("{0:.2f}".format(float(subtotal)) + ' €'))
+                            var.ui.tabVentas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                            var.ui.tabVentas.item(index, 2).setTextAlignment(QtCore.Qt.AlignCenter)
+                            var.ui.tabVentas.item(index, 3).setTextAlignment(QtCore.Qt.AlignCenter)
+                            var.ui.tabVentas.item(index, 4).setTextAlignment(QtCore.Qt.AlignRight)
+                        index += 1
+                        var.subtot = round(float(subtotal) + float(var.subtot), 2)
+
+                    if int(index) > 0:
+                        facturas.Facturas.prepararTablaventas(index)
+                    else:
+                        var.ui.tabVentas.setRowCount(0)
+                        facturas.Facturas.prepararTablaventas(0)
+
+                    var.ui.lblSubtotal.setText("{0:.2f}".format((float(var.subtot))))
+                    var.iva = round(float(var.subtot) * 0.21, 2)
+                    var.ui.lblIVA.setText("{0:.2f}".format((float(var.iva))))
+                    var.total = round(float(var.subtot) + float(var.iva), 2)
+        except Exception as error:
+            print("Error en la conexión de mostrar ventas: %s" % str(error))
+
+    def altaVenta(venta):
+        query = QtSql.QSqlQuery()
+        query.prepare('insert into ventas (codfacventa, codarticventa, cantidad, precio) VALUES (:codfacventa, :codarticventa, :cantidad, :precio)')
+        query.bindValue(':codfacventa', int(venta[0]))
+        query.bindValue(':codarticventa', int(venta[1]))
+        query.bindValue(':cantidad', int(venta[3]))
+        query.bindValue(':precio', int(venta[4]))
+        fila = var.ui.tabVentas.currentRow()
+        if query.exec_():
+            var.ui.lblStatus.setText('Venta dade de alta satisfactoriamente')
+            var.ui.tabVentas.setItem(fila, 1, QtWidgets.QTableWidgetItem(str(venta[2])))
+            var.ui.tabVentas.setItem(fila, 2, QtWidgets.QTableWidgetItem(str(venta[3])))
+            var.ui.tabVentas.setItem(fila, 3, QtWidgets.QTableWidgetItem(str(venta[4])))
+            var.ui.tabVentas.setItem(fila, 4, QtWidgets.QTableWidgetItem(str(venta[5])))
+            fila += 1
+            var.ui.tabVentas.insertRow(fila)
+            var.ui.tabVentas.setCellWidget(fila, 1, var.cmbVenta)
+            var.ui.tabVentas.scrollToBottom()
+            Conexion.cargarCmbventa(var.cmbVenta)
+
+    def anulaVenta(codigo):
+        query = QtSql.QSqlQuery()
+        query.prepare('delete from ventas where codventa = :codventa')
+        query.bindValue(':codventa', codigo)
+        if query.exec_():
+            var.ui.lblStatus.setText("Venta anulada con éxito")
+        else:
+            print("Error al dar de baja la venta: ", query.lastError().text())
+
+    def altaFact(dni, apel, fecha):
         query = QtSql.QSqlQuery()
         query.prepare('insert into facturas (dni, fecha, apellidos)'
                        'VALUES(:dni, :fecha, :apellidos)')
-        query.bindValue(':dni', str(factura[0]))
-        query.bindValue(':fecha', str(factura[2]))
-        query.bindValue(':apellidos', str(factura[1]))
+        query.bindValue(':dni', dni)
+        query.bindValue(':fecha', fecha)
+        query.bindValue(':apellidos', apel)
         if query.exec_():
             print("Factura dada de alta satisfactoriamente")
             Conexion.mostrarFacturas(None)
@@ -53,15 +129,26 @@ class Conexion():
         else:
             print("Error mostrar facturas")
 
-    def cargarFactura():
+    def cargarFactura(codigo):
         query = QtSql.QSqlQuery()
         query.prepare('select dni, fecha, apellidos from facturas where codfactura = :codfactura')
-        query.bindValue(':codfactura', var.ui.lblCodFact.text())
+        query.bindValue(':codfactura', codigo)
         if query.exec_():
             while(query.next()):
                 var.ui.editDniFact.setText(str(query.value(0)))
                 var.ui.editFechaFact.setText(str(query.value(1)))
                 var.ui.editApelFact.setText(str(query.value(2)))
+
+    def cargarFac2(self):
+        query = QtSql.QSqlQuery()
+        query.prepare('selct codfactura, dni, fecha, apellidos from facturas order by dofactura desc limit 1')
+        if query.exec_():
+            while query.next():
+                var.ui.lblCodFact.setText(str(query.value(0)))
+                var.ui.editDni.setText(str(query.value(1)))
+                var.ui.editFechaFact.setText(str(query.value(2)))
+                var.ui.editApelFact.setText(str(query.value(3)))
+
 
     def bajaFactura(codfact):
         query = QtSql.QSqlQuery()
@@ -288,8 +375,18 @@ class Conexion():
         var.cmbVenta.clear()
         query = QtSql.QSqlQuery()
         var.cmbVenta.addItem('')
-        query.prepare('select codigo, producto from productos order by producto')
+        query.prepare('select codigo, nome from articulos order by nome')
         if query.exec_():
             while query.next():
-                var.cmbventa.addItem(str(query.value(1)))
+                var.cmbVenta.addItem(str(query.value(1)))
 
+
+    def obtenerCodPrec(articulo):
+        cp = []
+        query = QtSql.QSqlQuery()
+        query.prepare('select codigo, prezo from articulos where nome = :articulo')
+        query.bindValue(':articulo', str(articulo))
+        if query.exec_():
+            while query.next():
+                cp = [str(query.value(0)), str(query.value(1))]
+        return cp
