@@ -129,10 +129,12 @@ class Facturas():
             subtotal = round(float(cantidad) * float(dato[1]), 2)  # probar precio
             venta.append(subtotal)
             venta.append(fila)
+            print(venta)
             if codigo != '' and articulo != '' and cantidad != '':
                 conexion.Conexion.altaVenta(venta)
                 var.subtot = round(float(subtotal) + float(var.subtot), 2)
                 var.ui.lblSubtotal.setText(str(var.subtot))
+                print(str(var.subtot))
                 var.iva = round(float(var.subtot) * 0.21, 2)
                 var.ui.lblIVA.setText(str(var.iva))
                 var.total = round(float(var.iva) + float(var.subtot), 2)
