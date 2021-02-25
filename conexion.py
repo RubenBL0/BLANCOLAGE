@@ -54,6 +54,9 @@ class Conexion():
                         var.ui.tabVentas.setRowCount(0)
                         facturas.Facturas.prepararTablaventas(0)
 
+                    #ES AQUI: HACER UN MODULO QUE CALCULE EL SUBTOTAL, IVA Y TOTAL DE CADA FACTURA Y LO CARGUE EN CADA CAMBIO EN VEZ DE CAMBIAR LOS DATOS EN EL ALTA DE FACTURA
+                    #Y EN CONEXION
+                    print(var.subtot)
                     var.ui.lblSubtotal.setText("{0:.2f}".format((float(var.subtot))))
                     var.iva = round(float(var.subtot) * 0.21, 2)
                     var.ui.lblIVA.setText("{0:.2f}".format((float(var.iva))))
@@ -67,7 +70,7 @@ class Conexion():
         query.bindValue(':codfacventa', int(venta[0]))
         query.bindValue(':codarticventa', int(venta[1]))
         query.bindValue(':cantidad', int(venta[3]))
-        query.bindValue(':precio', int(venta[5]))
+        query.bindValue(':precio', float(venta[5]))
         fila = var.ui.tabVentas.currentRow()
         if query.exec_():
             var.ui.lblStatus.setText('Venta dade de alta satisfactoriamente')
