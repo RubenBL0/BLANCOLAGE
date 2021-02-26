@@ -16,8 +16,7 @@ class Conexion():
 
     def mostrarVentas(codigo):
         try:
-            var.ui.tabVentas.clearContents()
-            var.subfac = 0.00
+            var.subfac = Conexion.precioFac(codigo)
             query = QtSql.QSqlQuery()
             query1 = QtSql.QSqlQuery()
             query.prepare('select codventa, codarticventa, cantidad from ventas where codfacventa = :codigo')
@@ -44,25 +43,44 @@ class Conexion():
                             var.ui.tabVentas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                             var.ui.tabVentas.item(index, 2).setTextAlignment(QtCore.Qt.AlignCenter)
                             var.ui.tabVentas.item(index, 3).setTextAlignment(QtCore.Qt.AlignCenter)
-                            var.ui.tabVentas.item(index, 4).setTextAlignment(QtCore.Qt.AlignRight)
-                        index += 1
-                        var.subtot = round(float(subtotal) + float(var.subtot), 2)
+                            var.ui.tabVentas.item(index, 4).setTextAlignment(QtCore.Qt.AlignCenter)
+                            index += 1
 
-                    if int(index) > 0:
-                        facturas.Facturas.prepararTablaventas(index)
-                    else:
-                        var.ui.tabVentas.setRowCount(0)
-                        facturas.Facturas.prepararTablaventas(0)
+                if int(index) > 0:
+                    print("entro")
+                    facturas.Facturas.prepararTablaventas(index)
+                else:
+                    var.ui.tabVentas.setRowCount(0)
+                    facturas.Facturas.prepararTablaventas(0)
 
-                    #ES AQUI: HACER UN MODULO QUE CALCULE EL SUBTOTAL, IVA Y TOTAL DE CADA FACTURA Y LO CARGUE EN CADA CAMBIO EN VEZ DE CAMBIAR LOS DATOS EN EL ALTA DE FACTURA
-                    #Y EN CONEXION
-                    print(var.subtot)
-                    var.ui.lblSubtotal.setText("{0:.2f}".format((float(var.subtot))))
-                    var.iva = round(float(var.subtot) * 0.21, 2)
-                    var.ui.lblIVA.setText("{0:.2f}".format((float(var.iva))))
-                    var.total = round(float(var.subtot) + float(var.iva), 2)
+                #ES AQUI: HACER UN MODULO QUE CALCULE EL SUBTOTAL, IVA Y TOTAL DE CADA FACTURA Y LO CARGUE EN CADA CAMBIO EN VEZ DE CAMBIAR LOS DATOS EN EL ALTA DE FACTURA
+                #Y EN CONEXION
+                Conexion.calcularPrecios(var.subfac)
         except Exception as error:
             print("Error en la conexión de mostrar ventas: %s" % str(error))
+
+    def precioFac(codigo):
+        total = 0.00
+        query = QtSql.QSqlQuery()
+        query.prepare('select precio from ventas where codfacventa = :codigo')
+        query.bindValue(':codigo', codigo)
+        if query.exec_():
+            while query.next():
+                total += float(query.value(0))
+
+        print("Total", total)
+        return total
+
+
+    def calcularPrecios(subtot):
+        var.ui.lblSubtotal.setText("{0:.2f}".format((float(subtot))))
+        iva = round(float(subtot) * 0.21, 2)
+        var.ui.lblIVA.setText("{0:.2f}".format((float(iva))))
+        total = round(float(subtot) + float(iva), 2)
+        print(total)
+        var.ui.lblTotal.setText("{0:.2f}".format((float(total))))
+
+
 
     def altaVenta(venta):
         query = QtSql.QSqlQuery()
@@ -133,6 +151,39 @@ class Conexion():
         else:
             print("Error mostrar facturas")
 
+    def cargarVentasFactura(codigo):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codventa, codarticventa, cantidad, precio from ventas where codfacventa = :codigo')
+            query.bindValue(':codigo', codigo)
+            query2 = QtSql.QSqlQuery()
+            query2.prepare('select nome, prezo from articulos where codigo = :codigo')
+            if query.exec_():
+                while query.next():
+                    codventa = query.value(0)
+                    artic = query.value(1)
+                    cantidad = query.value(2)
+                    precio = query.value(3)
+                    query2.bindValue(':codigo', artic)
+                    if query2.exec_():
+                        while query2.next():
+                            nome = query2.value(0)
+                            unidad = query2.value(1)
+
+                            var.ui.tabVentas.setRowCount(index + 1)
+                            var.ui.tabVentas.setItem(index, 0, QtWidgets.QTableWidgetItem(codventa))
+                            var.ui.tabVentas.setItem(index, 1, QtWidgets.QTableWidgetItem(nome))
+                            var.ui.tabVentas.setItem(index, 2, QtWidgets.QTableWidgetItem(cantidad))
+                            var.ui.tabVentas.setItem(index, 3, QtWidgets.QTableWidgetItem(unidad))
+                            var.ui.tabVentas.setItem(index, 4, QtWidgets.QTableWidgetItem(precio))
+                            index += 1
+
+            facturas.Facturas.prepararTablaventas(index)
+        except Exception as error:
+            print("ERROR: %s" % str(error))
+
+
     def cargarFactura(codigo):
         query = QtSql.QSqlQuery()
         query.prepare('select dni, fecha, apellidos from facturas where codfactura = :codfactura')
@@ -145,7 +196,7 @@ class Conexion():
 
     def cargarFac2(self):
         query = QtSql.QSqlQuery()
-        query.prepare('selct codfactura, dni, fecha, apellidos from facturas order by dofactura desc limit 1')
+        query.prepare('select codfactura, dni, fecha, apellidos from facturas order by codfactura desc limit 1')
         if query.exec_():
             while query.next():
                 var.ui.lblCodFact.setText(str(query.value(0)))

@@ -65,6 +65,7 @@ class Facturas():
             var.ui.lblCodFact.setText(str(fila[0]))
             var.ui.editFechaFact.setText(str(fila[1]))
             conexion.Conexion.cargarFactura(str(fila[0]))
+            conexion.Conexion.cargarVentasFactura(str(fila[0]))
         except Exception as error:
             print('Error al cargar factura %s' % str(error))
 
@@ -93,6 +94,7 @@ class Facturas():
         y carga dicho combo con los datos del producto
         :return:
         '''
+        print("Index", index)
         try:
             var.cmbVenta = QtWidgets.QComboBox()
             conexion.Conexion.cargarCmbventa(var.cmbVenta)
@@ -133,14 +135,6 @@ class Facturas():
             print(venta)
             if codigo != '' and articulo != '' and cantidad != '':
                 conexion.Conexion.altaVenta(venta)
-                print(var.subtot)
-                var.subtot = round(float(subtotal) + float(var.subtot), 2)
-                var.ui.lblSubtotal.setText(str(var.subtot))
-                print(str(var.subtot))
-                var.iva = round(float(var.subtot) * 0.21, 2)
-                var.ui.lblIVA.setText(str(var.iva))
-                var.total = round(float(var.iva) + float(var.subtot), 2)
-                var.ui.lblTotal.setText(str(var.total))
                 Facturas.mostrarVentas()
             else:
                 var.ui.lblStatus.setText('Faltan datos')
