@@ -65,7 +65,7 @@ class Facturas():
             var.ui.lblCodFact.setText(str(fila[0]))
             var.ui.editFechaFact.setText(str(fila[1]))
             conexion.Conexion.cargarFactura(str(fila[0]))
-            conexion.Conexion.cargarVentasFactura(str(fila[0]))
+            conexion.Conexion.mostrarVentas(str(fila[0]))
         except Exception as error:
             print('Error al cargar factura %s' % str(error))
 
