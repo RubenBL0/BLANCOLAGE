@@ -83,6 +83,7 @@ class Facturas():
     def buscarFactura():
         try:
             dni = var.ui.editDniFact.text()
+            print(dni)
             conexion.Conexion.buscarFactura(dni)
 
         except Exception as error:
@@ -94,7 +95,6 @@ class Facturas():
         y carga dicho combo con los datos del producto
         :return:
         '''
-        print("Index", index)
         try:
             var.cmbVenta = QtWidgets.QComboBox()
             conexion.Conexion.cargarCmbventa(var.cmbVenta)

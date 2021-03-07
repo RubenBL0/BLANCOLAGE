@@ -2013,6 +2013,7 @@
      <string>Archivo</string>
     </property>
     <addaction name="actionAbrir"/>
+    <addaction name="actionImportarProd"/>
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
@@ -2027,11 +2028,23 @@
      <string>Informes</string>
     </property>
     <addaction name="actionInformeClientes"/>
+    <addaction name="separator"/>
     <addaction name="actionInformeProductos"/>
+    <addaction name="separator"/>
+    <addaction name="actionFacturas"/>
+    <addaction name="actionFacturasCliente"/>
+   </widget>
+   <widget class="QMenu" name="menuBackup">
+    <property name="title">
+     <string>Backup</string>
+    </property>
+    <addaction name="actionBackup"/>
+    <addaction name="actionRestaurarBackup"/>
    </widget>
    <addaction name="menuArchivo"/>
-   <addaction name="menuAyuda"/>
    <addaction name="menuInformes"/>
+   <addaction name="menuBackup"/>
+   <addaction name="menuAyuda"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -2154,6 +2167,31 @@
   <action name="actionInformeProductos">
    <property name="text">
     <string>Informe de productos</string>
+   </property>
+  </action>
+  <action name="actionFacturas">
+   <property name="text">
+    <string>Imprimir factura</string>
+   </property>
+  </action>
+  <action name="actionFacturasCliente">
+   <property name="text">
+    <string>Facturas del cliente</string>
+   </property>
+  </action>
+  <action name="actionBackup">
+   <property name="text">
+    <string>Crear backup</string>
+   </property>
+  </action>
+  <action name="actionRestaurarBackup">
+   <property name="text">
+    <string>Restaurar backup</string>
+   </property>
+  </action>
+  <action name="actionImportarProd">
+   <property name="text">
+    <string>Importar Excel</string>
    </property>
   </action>
  </widget>

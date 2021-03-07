@@ -124,7 +124,6 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnBuscarCli.clicked.connect(clients.Clientes.buscarCli)
         var.ui.statusbar.addPermanentWidget(var.ui.lblStatus, 1)
         var.ui.lblStatus.setText("Bienvenido a 2º DAM")
-        var.ui.toolbarBackup.triggered.connect(events.Eventos.Backup)
         var.ui.toolbarSalir.triggered.connect(events.Eventos.Salir)
         var.ui.toolbarAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
@@ -157,7 +156,7 @@ class Main(QtWidgets.QMainWindow):
         funciones de facturas
         '''
         var.ui.btnFechaFact.clicked.connect(facturas.Facturas.abrirCalendar)
-        var.ui.btnReloadFact.clicked.connect(facturas.Facturas.limpiarFactura)
+        var.ui.btnReloadFact.clicked.connect(conexion.Conexion.mostrarFacturas)
         var.ui.btnFactura.clicked.connect(facturas.Facturas.altaFactura)
         var.ui.tabFacturas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabVentas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
@@ -182,6 +181,17 @@ class Main(QtWidgets.QMainWindow):
         '''
         var.ui.actionInformeClientes.triggered.connect(printer.Printer.reportCli)
         var.ui.actionInformeProductos.triggered.connect(printer.Printer.reportProductos)
+        var.ui.actionFacturas.triggered.connect(printer.Printer.reportFact)
+        var.ui.actionFacturasCliente.triggered.connect(printer.Printer.reportFacCli)
+
+        '''
+        módulos de supuestos prácticos
+        '''
+        var.ui.toolbarBackup.triggered.connect(events.Eventos.Backup)
+        var.ui.actionBackup.triggered.connect(events.Eventos.Backup)
+        var.ui.actionRestaurarBackup.triggered.connect(events.Eventos.cargarBackup)
+        var.ui.actionImportarProd.triggered.connect(events.Eventos.cargarDesdeExcel)
+
     def closeEvent(self, event):
         if event:
             events.Eventos.Salir(event)
@@ -191,4 +201,5 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
     window.showMaximized() # PONER SHOWMAXIMIZED()
+    window.setWindowIcon(QtGui.QIcon("img/logo.ico"))
     sys.exit(app.exec())

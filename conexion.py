@@ -16,6 +16,7 @@ class Conexion():
 
     def mostrarVentas(codigo):
         try:
+            var.ui.tabVentas.clearContents()
             var.subfac = Conexion.precioFac(codigo)
             query = QtSql.QSqlQuery()
             query1 = QtSql.QSqlQuery()
@@ -34,6 +35,7 @@ class Conexion():
                     if query1.exec_():
                         while query1.next():
                             articulo = query1.value(0)
+                            print(codventa, articulo)
                             precio = query1.value(1)
                             var.ui.tabVentas.setItem(index, 1, QtWidgets.QTableWidgetItem(str(articulo)))
                             var.ui.tabVentas.setItem(index, 2, QtWidgets.QTableWidgetItem(str(cantidad)))
@@ -44,10 +46,10 @@ class Conexion():
                             var.ui.tabVentas.item(index, 2).setTextAlignment(QtCore.Qt.AlignCenter)
                             var.ui.tabVentas.item(index, 3).setTextAlignment(QtCore.Qt.AlignCenter)
                             var.ui.tabVentas.item(index, 4).setTextAlignment(QtCore.Qt.AlignCenter)
+
                             index += 1
 
                 if int(index) > 0:
-                    print("entro")
                     facturas.Facturas.prepararTablaventas(index)
                 else:
                     var.ui.tabVentas.setRowCount(0)
@@ -139,7 +141,7 @@ class Conexion():
             var.ui.tabFacturas.removeRow(0)
         index = 0
         query = QtSql.QSqlQuery()
-        query.prepare('select codfactura, fecha from facturas')
+        query.prepare('select codfactura, fecha from facturas order by codfactura asc')
         if query.exec_():
             while query.next():
                 cod = str(query.value(0))
@@ -148,6 +150,7 @@ class Conexion():
                 var.ui.tabFacturas.setItem(index, 0, QtWidgets.QTableWidgetItem(cod))
                 var.ui.tabFacturas.setItem(index, 1, QtWidgets.QTableWidgetItem(fecha))
                 index += 1
+            facturas.Facturas.limpiarFactura()
         else:
             print("Error mostrar facturas")
 
@@ -213,14 +216,22 @@ class Conexion():
             print('Factura eliminada satisfactoriamente')
 
     def buscarFactura(dni):
+        index = 0
         query = QtSql.QSqlQuery()
-        query.prepare('select * from facturas where dni = :dni')
-        query.bindValue(':dni', dni)
+        query.prepare('select codfactura, fecha from facturas where dni = :dni order by codfactura desc')
+        query.bindValue(':dni', str(dni))
         if query.exec_():
             while query.next():
-                var.ui.lblCodFact.setText(query.value(0))
-                var.ui.editFechaFact.setText(query.value(2))
-                var.ui.editApelFact.setText(str(query.value(3)))
+                print("a")
+                codfac = query.value(0)
+                print(codfac)
+                fecha = query.value(1)
+
+                var.ui.tabFacturas.setRowCount(index + 1)
+
+                var.ui.tabFacturas.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codfac)))
+                var.ui.tabFacturas.setItem(index, 1, QtWidgets.QTableWidgetItem(str(fecha)))
+                index += 1
 
     def cargarProducto():
         codigo = var.ui.lblCodProd.text()
