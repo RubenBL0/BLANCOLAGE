@@ -51,13 +51,13 @@ class DialogCalendar(QtWidgets.QDialog):
 class DialogCalendarFactura(QtWidgets.QDialog):
     def __init__(self):
         super(DialogCalendarFactura, self).__init__()
-        var.dlgcalendar = Ui_dlgCalendar()
-        var.dlgcalendar.setupUi(self)
+        var.dlgcalendarfact  = Ui_dlgCalendar()
+        var.dlgcalendarfact.setupUi(self)
         diaactual = datetime.now().day
         mesactual = datetime.now().month
         anoactual = datetime.now().year
-        var.dlgcalendar.Calendar.setSelectedDate((QtCore.QDate(anoactual, mesactual, diaactual)))
-        var.dlgcalendar.Calendar.clicked.connect(facturas.Facturas.cargarFecha)
+        var.dlgcalendarfact.Calendar.setSelectedDate((QtCore.QDate(anoactual, mesactual, diaactual)))
+        var.dlgcalendarfact.Calendar.clicked.connect(facturas.Facturas.cargarFecha)
         self.setModal(True)
 
 class CmbVenta(QtWidgets.QComboBox):

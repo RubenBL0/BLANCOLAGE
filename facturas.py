@@ -6,7 +6,9 @@ class Facturas():
 
     def abrirCalendar():
         '''
-        Abrir la ventana calendario específica para el módulo de facturas (no el de clientes)
+        Módulo que  la ventana calendario específica para el módulo de facturas
+        :return: None
+
         '''
         try:
             var.dlgcalendarfact.show()
@@ -15,7 +17,9 @@ class Facturas():
 
     def cargarFecha(qDate):
         ''''
-        Carga la fecha cuando clickamos en la ventana del calendario
+        Módulo que carga la fecha seleccionada en el formulario
+        :return: None
+
         '''
         try:
             data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
@@ -26,7 +30,9 @@ class Facturas():
 
     def limpiarFactura():
         '''
-        Limpia los datos del formulario
+        Módulo que limpia los datos del formulario
+        :return: None
+
         '''
         fields = [var.ui.lblCodFact, var.ui.editFechaFact, var.ui.editDniFact, var.ui.editApelFact]
 
@@ -35,7 +41,9 @@ class Facturas():
 
     def altaFactura(self):
         '''
-        Da de alta una factura vacía, utilizando el nombre, apellidos y la fecha introducidos
+        Módulo que da de alta una factura nueva, utilizando el nombre, apellidos y la fecha introducidos
+        :return: None
+
         '''
         try:
             dni = var.ui.editDniFact.text()
@@ -53,7 +61,9 @@ class Facturas():
 
     def cargarFactura(self):
         '''
-        Carga los datos seleccionados en la tabla en el formulario de facturas
+        Módulo que carga los datos de la factura seleccionada en el formulario
+        :return: None
+
         '''
         try:
             var.subtotal = 0.00
@@ -70,6 +80,11 @@ class Facturas():
             print('Error al cargar factura %s' % str(error))
 
     def borrarFactura():
+        '''
+        Módulo que elimina la factura seleccionada de la base de datos
+        :return: None
+
+        '''
         try:
             codfact = var.ui.lblCodFact.text()
             conexion.Conexion.bajaFactura(codfact)
@@ -81,6 +96,11 @@ class Facturas():
             print('Error al eliminar la factura: %s' % str(error))
 
     def buscarFactura():
+        '''
+        Módulo que recoge el DNI del formulario para buscar las facturas asociadas al cliente
+        :return: None
+
+        '''
         try:
             dni = var.ui.editDniFact.text()
             print(dni)
@@ -91,9 +111,12 @@ class Facturas():
 
     def prepararTablaventas(index):
         '''
-        Modulo que prepara tabla Ventas, carga un combo en la tabla
+        Módulo que prepara tabla Ventas, carga un combo en la tabla
         y carga dicho combo con los datos del producto
-        :return:
+        :param index: La fila de la tabla en la que se insertará
+        :type index: int
+        :return: None
+
         '''
         try:
             var.cmbVenta = QtWidgets.QComboBox()
@@ -108,11 +131,11 @@ class Facturas():
             print('Error Preparar tabla de ventas: %s ' % str(error))
 
     def altaVenta(self):
-        """
-        Módulo que da de alta una venta de un producto en una factura.
+        '''
+        Módulo que da de alta la venta de un producto en la factura
+        :return: None
 
-        :return None
-        """
+        '''
         try:
             var.subtot = 0.00
             venta = []
@@ -143,6 +166,11 @@ class Facturas():
             print("Error al dar de alta una venta: " % str(error))
 
     def mostrarVentas():
+        '''
+        Módulo que llama a la conexión con la base de datos para mostrar todas las ventas en la tabla de ventas
+        :return: None
+
+        '''
         try:
             var.cmbVenta = QtWidgets.QComboBox()
             conexion.Conexion.cargarCmbventa(var.cmbVenta)
@@ -153,6 +181,11 @@ class Facturas():
             print("Error al mostrar las ventas de la factura: " % str(error))
 
     def anularVenta(self):
+        '''
+        Módulo que anula una venta hecha en una factura
+        :return: None
+
+        '''
         try:
             fila = var.ui.tabVentas.selectedItems()
             if fila:

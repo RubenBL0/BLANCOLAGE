@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>facturas module &#8212; documentación de BLANCOLAGE - v.0.2.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-facturas">
+<span id="facturas-module"></span><h1>facturas module<a class="headerlink" href="#module-facturas" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="py class">
+<dt id="facturas.Facturas">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">facturas.</span></code><code class="sig-name descname"><span class="pre">Facturas</span></code><a class="reference internal" href="../_modules/facturas.html#Facturas"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="facturas.Facturas.abrirCalendar">
+<code class="sig-name descname"><span class="pre">abrirCalendar</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.abrirCalendar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.abrirCalendar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que  la ventana calendario específica para el módulo de facturas
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="facturas.Facturas.altaFactura">
+<code class="sig-name descname"><span class="pre">altaFactura</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.altaFactura"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.altaFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que da de alta una factura nueva, utilizando el nombre, apellidos y la fecha introducidos
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="facturas.Facturas.altaVenta">
+<code class="sig-name descname"><span class="pre">altaVenta</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.altaVenta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.altaVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que da de alta la venta de un producto en la factura
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="facturas.Facturas.anularVenta">
+<code class="sig-name descname"><span class="pre">anularVenta</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.anularVenta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.anularVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que anula una venta hecha en una factura
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="facturas.Facturas.borrarFactura">
+<code class="sig-name descname"><span class="pre">borrarFactura</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.borrarFactura"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.borrarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que elimina la factura seleccionada de la base de datos
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="facturas.Facturas.buscarFactura">
+<code class="sig-name descname"><span class="pre">buscarFactura</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.buscarFactura"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.buscarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que recoge el DNI del formulario para buscar las facturas asociadas al cliente
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="facturas.Facturas.cargarFactura">
+<code class="sig-name descname"><span class="pre">cargarFactura</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.cargarFactura"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.cargarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que carga los datos de la factura seleccionada en el formulario
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="facturas.Facturas.cargarFecha">
+<code class="sig-name descname"><span class="pre">cargarFecha</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.cargarFecha"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.cargarFecha" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>“
+Módulo que carga la fecha seleccionada en el formulario
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="facturas.Facturas.limpiarFactura">
+<code class="sig-name descname"><span class="pre">limpiarFactura</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.limpiarFactura"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.limpiarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que limpia los datos del formulario
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="facturas.Facturas.mostrarVentas">
+<code class="sig-name descname"><span class="pre">mostrarVentas</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.mostrarVentas"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.mostrarVentas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que llama a la conexión con la base de datos para mostrar todas las ventas en la tabla de ventas
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="facturas.Facturas.prepararTablaventas">
+<code class="sig-name descname"><span class="pre">prepararTablaventas</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.prepararTablaventas"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.prepararTablaventas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que prepara tabla Ventas, carga un combo en la tabla
+y carga dicho combo con los datos del producto
+:param index: La fila de la tabla en la que se insertará
+:type index: int
+:return: None</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">BLANCOLAGE</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Ruben Blanco Lage.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/src/facturas.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

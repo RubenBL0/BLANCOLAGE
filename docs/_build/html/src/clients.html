@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>clients module &#8212; documentación de BLANCOLAGE - v.0.2.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-clients">
+<span id="clients-module"></span><h1>clients module<a class="headerlink" href="#module-clients" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="py class">
+<dt id="clients.Clientes">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">clients.</span></code><code class="sig-name descname"><span class="pre">Clientes</span></code><a class="reference internal" href="../_modules/clients.html#Clientes"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Eventos necesarios para el formulario clientes</p>
+<dl class="py method">
+<dt id="clients.Clientes.abrirCalendar">
+<code class="sig-name descname"><span class="pre">abrirCalendar</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.abrirCalendar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.abrirCalendar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que abre la ventana de diálogo del calendario
+:param: None
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.altaCliente">
+<code class="sig-name descname"><span class="pre">altaCliente</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.altaCliente"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.altaCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que carga los datos del formulario en la base de datos y los muestra en la tabla
+:param: None
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.bajaCliente">
+<code class="sig-name descname"><span class="pre">bajaCliente</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.bajaCliente"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.bajaCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que elimina de la base de datos el cliente seleccionado
+:param: None
+:return: None
+Confirma el borrado mediante un mensaje en el statusbar</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.buscarCli">
+<code class="sig-name descname"><span class="pre">buscarCli</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.buscarCli"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.buscarCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que busca un cliente por su DNI y lo carga en el formulario
+:param: None
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.cargarCli">
+<code class="sig-name descname"><span class="pre">cargarCli</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.cargarCli"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.cargarCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que carga en el formulario los datos del cliente seleccionado en la tabla
+:param: None
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.cargarFecha">
+<code class="sig-name descname"><span class="pre">cargarFecha</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.cargarFecha"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.cargarFecha" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que carga el valor de la fecha seleccionada en el formulario
+:param: None
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.limpiarCli">
+<code class="sig-name descname"><span class="pre">limpiarCli</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.limpiarCli"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.limpiarCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que limpia los datos del formulario cliente
+:param: None
+:return: None
+Muestra el texto original del statusbar</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.modifCliente">
+<code class="sig-name descname"><span class="pre">modifCliente</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.modifCliente"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.modifCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que modifica los datos del cliente cargado en el formulario
+:param: None
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.reloadCli">
+<code class="sig-name descname"><span class="pre">reloadCli</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.reloadCli"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.reloadCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que llama a la función que limpia el formulario
+:param: None
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.selPago">
+<code class="sig-name descname"><span class="pre">selPago</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.selPago"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.selPago" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que recoge los valores marcados relacionados con el pago y los devuelve en una lista
+:param: None
+:return: Una lista que contiene los valores seleccionados
+:rtype: list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.selProv">
+<code class="sig-name descname"><span class="pre">selProv</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.selProv"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.selProv" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que asigna el valor seleccionado en el combobox de provincia a una variable global
+:param: La provincia seleccionada
+:type: String
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.selSexo">
+<code class="sig-name descname"><span class="pre">selSexo</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.selSexo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.selSexo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que recoge el comprueba el estado de las checkbox del sexo y guarda el valor seleccionado en una variable
+:param: None
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.validarDni">
+<code class="sig-name descname"><span class="pre">validarDni</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.validarDni"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.validarDni" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que validará el DNI utilizando el algoritmo de comprobación.
+:param dni: Cadena que se comprobará
+:type dni: String
+:return: Devolverá True si la cadena realiza el algoritmo de comprobación correctamente y False si no es así
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clientes.validoDni">
+<code class="sig-name descname"><span class="pre">validoDni</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clientes.validoDni"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clients.Clientes.validoDni" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Muestra si el DNI es válido con un V verde, y si es incorrecto con una X roja en la etiqueta lblValidar
+:param: None
+:return: None</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">BLANCOLAGE</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Ruben Blanco Lage.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/src/clients.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

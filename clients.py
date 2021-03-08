@@ -5,10 +5,15 @@ class Clientes():
     '''
     Eventos necesarios para el formulario clientes
     '''
+
     def validarDni(dni):
         '''
-        Código que controla si el dni o nie es correcto
-        :return:
+        Módulo que validará el DNI utilizando el algoritmo de comprobación.
+        :param dni: Cadena que se comprobará
+        :type dni: String
+        :return: Devolverá True si la cadena realiza el algoritmo de comprobación correctamente y False si no es así
+        :rtype: bool
+
         '''
         try:
             tabla = 'TRWAGMYFPDXBNJZSQVHLCKE'
@@ -28,8 +33,10 @@ class Clientes():
 
     def validoDni():
         '''
-        Muestra si el DNI es válido con un V verde, y si es
-        incorrecto con una X roja, en la etiqueta lblValidar
+        Muestra si el DNI es válido con un V verde, y si es incorrecto con una X roja en la etiqueta lblValidar
+        :param: None
+        :return: None
+
         '''
         try:
             dni = var.ui.editDni.text()
@@ -48,7 +55,13 @@ class Clientes():
             print('Error al intentar validar el DNI: %s' % str(error))
             return None
 
-    def selSexo():      # Carga el valor del sexo seleccionado
+    def selSexo():
+        '''
+        Módulo que recoge el comprueba el estado de las checkbox del sexo y guarda el valor seleccionado en una variable
+        :param: None
+        :return: None
+
+        '''
         try:
             if var.ui.rbtFem.isChecked():
                 var.sex = 'Mujer'
@@ -58,6 +71,13 @@ class Clientes():
             print('Error al seleccionar el sexo: %s' % str(error))
 
     def selPago():      # Recoge y devuelve todos los datos marcados relacionados con el pago
+        '''
+        Módulo que recoge los valores marcados relacionados con el pago y los devuelve en una lista
+        :param: None
+        :return: Una lista que contiene los valores seleccionados
+        :rtype: list
+
+        '''
         try:
             var.pay = []
             for i, data in enumerate(var.ui.grpbtnPay.buttons()):
@@ -74,6 +94,13 @@ class Clientes():
 
 
     def selProv(prov):          # Guarda el valor seleccionado en la provincia en una variable global
+        '''
+        Módulo que asigna el valor seleccionado en el combobox de provincia a una variable global
+        :param: La provincia seleccionada
+        :type: String
+        :return: None
+
+        '''
         try:
             global vpro         # Definimos la variable global que contendrá la provincia
             vpro = prov
@@ -83,7 +110,10 @@ class Clientes():
 
     def abrirCalendar():
         '''
-        Abrir la ventana calendario
+        Módulo que abre la ventana de diálogo del calendario
+        :param: None
+        :return: None
+
         '''
         try:
             var.dlgcalendar.show()      # Muestra la ventana del calendario
@@ -91,8 +121,11 @@ class Clientes():
             print('Error al mostrar el calendario: %s ' % str(error))
 
     def cargarFecha(qDate):
-        ''''
-        Este módulo se ejecuta cuando clicamos en un día del calendar, es decir, clicked.connect de calendar
+        '''
+        Módulo que carga el valor de la fecha seleccionada en el formulario
+        :param: None
+        :return: None
+
         '''
         try:
             data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
@@ -103,8 +136,10 @@ class Clientes():
 
     def altaCliente():  # Se ejecuta cuando el usuario pulsa el botón Grabar
         '''
-        Carga los datos que introduzcamos en la base de datos y en la tabla
-        :return: none
+        Módulo que carga los datos del formulario en la base de datos y los muestra en la tabla
+        :param: None
+        :return: None
+
         '''
         # Preparamos los datos
         try:
@@ -125,7 +160,7 @@ class Clientes():
             newcli.append(var.pay2)
             newcli.append(var.ui.spinEdad.value())      # Así cargamos el spinner
             if client:  # Comprobar que no está vacío
-                if(Clientes.validarDni(var.ui.editDni.text) == False):
+                if(Clientes.validarDni == False):
                     print("No se puede añadir")
                 else:
                     row = 0
@@ -144,8 +179,11 @@ class Clientes():
 
     def limpiarCli():
         '''
-        limpia los datos del formulario cliente
-        :return: none
+        Módulo que limpia los datos del formulario cliente
+        :param: None
+        :return: None
+        Muestra el texto original del statusbar
+
         '''
         try:
             client = [var.ui.editDni, var.ui.editApel, var.ui.editNome, var.ui.editClialta, var.ui.editDir]
@@ -166,9 +204,9 @@ class Clientes():
 
     def cargarCli():
         '''
-        carga en widgets formulario cliente los datos
-        elegidos en la tabla
-        :return: none
+        Módulo que carga en el formulario los datos del cliente seleccionado en la tabla
+        :param: None
+        :return: None
         '''
         try:
             fila = var.ui.tableCli.selectedItems()
@@ -184,8 +222,11 @@ class Clientes():
 
     def bajaCliente(self):
         '''
-        módulos para dar de baja un cliente
-        :return:
+        Módulo que elimina de la base de datos el cliente seleccionado
+        :param: None
+        :return: None
+        Confirma el borrado mediante un mensaje en el statusbar
+
         '''
         try:
             dni = var.ui.editDni.text()
@@ -199,8 +240,10 @@ class Clientes():
 
     def modifCliente(self):
         '''
-        módulo para modificar datos de un cliente
-        :return:
+        Módulo que modifica los datos del cliente cargado en el formulario
+        :param: None
+        :return: None
+
         '''
         try:
             newdata = []
@@ -221,6 +264,13 @@ class Clientes():
 
 
     def reloadCli(self):
+        '''
+        Módulo que llama a la función que limpia el formulario
+        :param: None
+        :return: None
+
+        '''
+
         try:
             Clientes.limpiarCli()
         except Exception as error:
@@ -228,8 +278,10 @@ class Clientes():
 
     def buscarCli(self):
         '''
-        Busca un Cliente a partir de un DNI que escribe el usuario
-        :return: mensaje
+        Módulo que busca un cliente por su DNI y lo carga en el formulario
+        :param: None
+        :return: None
+
         '''
 
         try:
@@ -237,13 +289,3 @@ class Clientes():
             conexion.Conexion.buscaCli(dni)
         except Exception as error:
             print("Error recargar clientes: %s" % str(error))
-
-
-
-
-
-
-
-
-
-

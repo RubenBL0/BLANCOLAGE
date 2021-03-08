@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>printer module &#8212; documentación de BLANCOLAGE - v.0.2.0</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-printer">
+<span id="printer-module"></span><h1>printer module<a class="headerlink" href="#module-printer" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="py class">
+<dt id="printer.Printer">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">printer.</span></code><code class="sig-name descname"><span class="pre">Printer</span></code><a class="reference internal" href="../_modules/printer.html#Printer"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#printer.Printer" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="printer.Printer.cabecera">
+<code class="sig-name descname"><span class="pre">cabecera</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.cabecera"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#printer.Printer.cabecera" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que imprime en el informe los datos de la cabecera, asociados a los datos de la empresa
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="printer.Printer.cabeceraCli">
+<code class="sig-name descname"><span class="pre">cabeceraCli</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.cabeceraCli"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#printer.Printer.cabeceraCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que imprime en el informe la cabecera asociada solamente al informe de clientes
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="printer.Printer.cabeceraFact">
+<code class="sig-name descname"><span class="pre">cabeceraFact</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.cabeceraFact"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#printer.Printer.cabeceraFact" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que imprime en el informe la cabecera relacionada solamente con el informe de factura
+:param codfac: El código de la factura
+:type codfac: int
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="printer.Printer.cabeceraProd">
+<code class="sig-name descname"><span class="pre">cabeceraProd</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.cabeceraProd"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#printer.Printer.cabeceraProd" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que imprime en el informe la cabecera asociados únicamente con el informe de productos
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="printer.Printer.pie">
+<code class="sig-name descname"><span class="pre">pie</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.pie"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#printer.Printer.pie" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que imprime en el informe el pie de la página, y contiene datos como la fecha, número de página y el nombre del informe
+:param textlistado: El nombre del informe
+:type textlistado: str
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="printer.Printer.reportCli">
+<code class="sig-name descname"><span class="pre">reportCli</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.reportCli"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#printer.Printer.reportCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que imprime en el informe los datos de todos los clientes
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="printer.Printer.reportFacCli">
+<code class="sig-name descname"><span class="pre">reportFacCli</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.reportFacCli"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#printer.Printer.reportFacCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que imprime en el informe los datos de las facturas asociadas a un cliente
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="printer.Printer.reportFact">
+<code class="sig-name descname"><span class="pre">reportFact</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.reportFact"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#printer.Printer.reportFact" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que imprime en el informe todas las ventas de una factura
+:return: None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="printer.Printer.reportProductos">
+<code class="sig-name descname"><span class="pre">reportProductos</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/printer.html#Printer.reportProductos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#printer.Printer.reportProductos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que imprime en el informe los datos de todos los productos
+:return: None</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">BLANCOLAGE</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Ruben Blanco Lage.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/src/printer.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

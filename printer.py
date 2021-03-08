@@ -6,6 +6,11 @@ from PyQt5 import QtSql
 class Printer():
 
     def cabecera(self):
+        '''
+        Módulo que imprime en el informe los datos de la cabecera, asociados a los datos de la empresa
+        :return: None
+
+        '''
         logo = '.\\img\logo.png'
         var.rep.setTitle("INFORMES")
         var.rep.setAuthor("Rubén Blanco Lage")
@@ -23,6 +28,13 @@ class Printer():
         var.rep.drawImage(logo, 450, 752)
 
     def pie(textlistado):
+        '''
+        Módulo que imprime en el informe el pie de la página, y contiene datos como la fecha, número de página y el nombre del informe
+        :param textlistado: El nombre del informe
+        :type textlistado: str
+        :return: None
+
+        '''
         try:
             var.rep.line(50, 50, 525, 50)
             fecha = datetime.today()
@@ -35,6 +47,11 @@ class Printer():
             print("Error en el pie de informe: %s" % str(error))
 
     def reportCli(self):
+        '''
+        Módulo que imprime en el informe los datos de todos los clientes
+        :return: None
+
+        '''
         try:
             textlistado = "LISTADO DE CLIENTES"
             var.rep = canvas.Canvas('informes/listadoclientes.pdf')
@@ -76,6 +93,11 @@ class Printer():
 
     #Cabecera única para el listado de clientes
     def cabeceraCli(self):
+        '''
+        Módulo que imprime en el informe la cabecera asociada solamente al informe de clientes
+        :return: None
+
+        '''
         try:
             var.rep.setFont("Helvetica-Bold", size=9)
             textlistado = "LISTADO DE CLIENTES"
@@ -92,6 +114,11 @@ class Printer():
             print("Error en la cabecera de clientes: " % str(error))
 
     def reportProductos(self):
+        '''
+        Módulo que imprime en el informe los datos de todos los productos
+        :return: None
+
+        '''
         try:
             textlistado = "LISTADO DE PRODUCTOS"
             var.rep = canvas.Canvas('informes/listadoproductos.pdf')
@@ -131,6 +158,11 @@ class Printer():
 
     # Cabecera única para el listado de productos
     def cabeceraProd(self):
+        '''
+        Módulo que imprime en el informe la cabecera asociados únicamente con el informe de productos
+        :return: None
+
+        '''
         try:
             var.rep.setFont("Helvetica-Bold", size=9)
             textlistado = "LISTADO DE PRODUCTOS"
@@ -147,6 +179,11 @@ class Printer():
 
 
     def reportFact(self):
+        '''
+        Módulo que imprime en el informe todas las ventas de una factura
+        :return: None
+
+        '''
         try:
             textlistado = "FACTURA"
             var.rep = canvas.Canvas("informes/factura.pdf")
@@ -200,6 +237,13 @@ class Printer():
 
 
     def cabeceraFact(codfac):
+        '''
+        Módulo que imprime en el informe la cabecera relacionada solamente con el informe de factura
+        :param codfac: El código de la factura
+        :type codfac: int
+        :return: None
+
+        '''
         try:
             var.rep.setFont("Helvetica-Bold", size=9)
             var.rep.drawString(55, 725, "Cliente: ")
@@ -239,6 +283,11 @@ class Printer():
             print("Error en la cabecera de factura: %s" % str(error))
 
     def reportFacCli(self):
+        '''
+        Módulo que imprime en el informe los datos de las facturas asociadas a un cliente
+        :return: None
+
+        '''
         try:
             dni = var.ui.editDniFact.text()
             textlistado = "FACTURAS DEL CLIENTE"
